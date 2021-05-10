@@ -31,22 +31,11 @@ from libqtile import layout, bar, widget
 
 from typing import List  # noqa: F401
 
-# >>> startup section >>>
-def exec_startup_cmds():
-    my_startup_cmds = [
-#        "picom -b",
-    ]
-    for cmd in my_startup_cmds:
-        os.system(cmd)
-
-exec_startup_cmds()
-# <<< startup section <<<
-
 mod = "mod4"
 myterm = "alacritty"
-myhome = '/home/gentoo/henrique/'
-myss_dir = myhome + 'Screenshots/'
-my_print_cmd = "sh -c 'import -window root " + myss_dir + "$(date +%Y%m%d%H%M%S).png'"
+my_screenshotdir = '/home/gentoo/henrique/Screenshots/'
+my_print_cmd = "sh -c 'import -window root " +\
+                my_screenshotdir + "$(date +%Y%m%d%H%M%S).png'"
 
 my_vol_cmd = "/home/gentoo/henrique/.config/qtile/get_volume.sh"
 my_rofi_cmd = "rofi -show drun"
@@ -77,7 +66,7 @@ keys = [
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "Return", lazy.spawn(myterm)),
     Key([mod], 'f', lazy.window.toggle_floating()),
-    #Key([mod, 'shift'], 'f', lazy.window.toggle_fullscreen()),
+    Key([mod], 'F11', lazy.window.toggle_fullscreen()),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -118,7 +107,7 @@ for i in groups:
 # >>> layouts section >>>
 
 layout_params = dict(
-    margin=10, 
+    margin=6, 
     border_focus='DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal='222120',
     border_width=2
@@ -140,11 +129,22 @@ layouts = [
 ]
 # <<< layouts section <<<
 
+colors = {
+    'text_highlight' : 'A73F32',
+}
+
 widget_defaults = dict(
     font='Source Code Pro Regular',
     fontsize=10,
     padding=3,
-    foreground='EDC29A'
+    foreground='EDC29A',
+    border_color='323130',
+
+    # graph monitor
+    line_width=2,
+    frequency=0.1,
+    start_pos='top',
+    samples=5000
 )
 extension_defaults = widget_defaults.copy()
 
@@ -152,10 +152,10 @@ mybar = bar.Bar([
                 widget.Image(filename = "~/.config/qtile/gentoo.png",
                              scale = True,
                              margin=5,),
-                widget.CurrentLayout(foreground='A73F32'),
+                widget.CurrentLayout(foreground=colors['text_highlight']),
                 widget.GroupBox(active='EDC29A',
-                                block_highlight_text_color='A73F32',
-                                this_current_screen_border='A73F32', #F6A73B',
+                                block_highlight_text_color=colors['text_highlight'],
+                                this_current_screen_border=colors['text_highlight'],
                                 borderwidth=1,
                                 disable_drag=True,
                                 font='Source Code Pro',),
@@ -163,33 +163,17 @@ mybar = bar.Bar([
                 widget.WindowName(),
                 widget.CPUGraph(graph_color='FF9AA0',
                                 fill_color='7D2F3E',
-                                border_color='323130',
-                                line_width=2,
-                                frequency=0.1, 
-                                samples=500,
-                                start_pos='top'),
+                                ),
                 widget.MemoryGraph(graph_color='FF0000',
                                    fill_color='A12231',
-                                   border_color='323130',
-                                   line_width=2,
-                                   samples=500,
-                                   frequency=0.1,
-                                   start_pos='top'),
+                                   ),
                 widget.NetGraph(graph_color='FF7753',
                                 fill_color='9C382B',
-                                border_color='323130',
-                                line_width=2,
-                                frequency=0.1,
-                                samples=500,
-                                start_pos='top'),
+                                ),
                 widget.HDDBusyGraph(device='sdb',
                                     graph_color='FAD42E',
                                     fill_color='9E6B26',
-                                    border_color='323130',
-                                    line_width=2,
-                                    frequency=0.1,
-                                    samples=500,
-                                    start_pos='top'),
+                                    ),
                 #widget.Cmus(),
                 widget.Wlan(interface='wlp3s0'),
                 widget.Volume(),
@@ -200,7 +184,8 @@ mybar = bar.Bar([
                 #widget.Wallpaper(directory='/home/shared/wallpapers/'),
                 #widget.QuickExit(),
             ],
-            24,
+            size=24,
+            # config
             opacity=0.9,
             margin=[3, 5, 3, 5],
             background='#171615')
@@ -210,7 +195,7 @@ bottom_bar = bar.Bar([
                 widget.Cmus(foreground=widget_defaults['foreground'])
             ],
             15,
-            opacity=0.9,
+            opacity=1,
             margin=[0, 250, 10, 250],
             background='#171615',
             align='center')
@@ -220,9 +205,10 @@ screens = [
     Screen(top=mybar,
            wallpaper='/home/shared/wallpapers/nebula.jpg',
            wallpaper_mode='fill',),
+
     Screen(top=mybar,
            wallpaper='/home/shared/wallpapers/nebula.jpg',
-           wallpaper_mode='fill'),
+           wallpaper_mode='fill',),
 ]
 
 # Drag floating layouts.
