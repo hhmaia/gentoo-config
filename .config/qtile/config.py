@@ -38,7 +38,7 @@ my_print_cmd = "sh -c 'import -window root " +\
                 my_screenshotdir + "$(date +%Y%m%d%H%M%S).png'"
 
 my_vol_cmd = "/home/gentoo/henrique/.config/qtile/get_volume.sh"
-my_rofi_cmd = "rofi -show drun"
+my_rofi_cmd = "rofi -theme /usr/share/rofi/themes/arthur.rasi -show drun"
 
 keys = [
     # Switch between windows in current stack pane
