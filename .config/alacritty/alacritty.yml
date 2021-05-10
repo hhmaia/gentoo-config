@@ -11,17 +11,14 @@ key_bindings:
 
 font:
   normal:
-    #family: Mono
     family: Source Code Pro
     style: Regular
 
   bold:
-    #family: Mono
     family: Source Code Pro
     style: Bold
 
   italic:
-    #family: Mono
     family: Source Code Pro
     style: Italic
 
