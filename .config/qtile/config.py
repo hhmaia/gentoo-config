@@ -181,9 +181,8 @@ mybar = bar.Bar([
                 widget.Sep(**separator_options),
                 widget.WindowName(),
                 widget.Cmus(foreground=widget_defaults['foreground'],
-                            align='right',
                             play_color=colors['text_highlight'],
-
+                            align='right',
                 ),
                 widget.Sep(**separator_options),
                 widget.Volume(),
