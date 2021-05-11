@@ -24,10 +24,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 import os
+import subprocess
 import time
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.lazy import lazy
-from libqtile import layout, bar, widget
+from libqtile import layout, bar, widget, hook
 
 from typing import List  # noqa: F401
 
@@ -87,8 +88,8 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn("cmus-remote -n")),
     Key([], "XF86AudioPrev", lazy.spawn("cmus-remote -r")),
     Key([], "XF86AudioStop", lazy.spawn("cmus-remote -s")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume 0 +5%")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume 0 -5%")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +5%")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -5%")),
     Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute 0 toggle")), 
 ]
 
@@ -133,13 +134,16 @@ layouts = [
 
 colors = {
     'text_highlight' : 'A73F32',
+    'text_normal' : 'EDC29A', 
 }
 
+
 widget_defaults = dict(
-    font='Source Code Pro Regular',
-    fontsize=10,
+    font='Source Code Pro',
+    fontsize=9,
     padding=3,
     foreground='EDC29A',
+    background='171615',
     border_color='323130',
 
     # graph monitor
@@ -150,57 +154,63 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+
+separator_options = dict(
+    foreground=widget_defaults['border_color'],
+    linewidth=2,
+    size_percent=50,
+    padding=3,
+)
+
 mybar = bar.Bar([
                 widget.Image(filename = "~/.config/qtile/gentoo.png",
                              scale = True,
-                             margin=5,),
-                widget.CurrentLayout(foreground=colors['text_highlight']),
+                             margin=5,
+                ),
+                widget.CurrentLayout(foreground=colors['text_highlight'],
+                ),
                 widget.GroupBox(active='EDC29A',
                                 block_highlight_text_color=colors['text_highlight'],
                                 this_current_screen_border=colors['text_highlight'],
                                 borderwidth=1,
                                 disable_drag=True,
-                                font='Source Code Pro',),
+                ),
+
+                widget.Sep(**separator_options),
                 widget.Prompt(),
+                widget.Sep(**separator_options),
                 widget.WindowName(),
+                widget.Cmus(foreground=widget_defaults['foreground'],
+                            align='right',
+                            play_color=colors['text_highlight'],
+
+                ),
+                widget.Sep(**separator_options),
+                widget.Volume(),
+                widget.Systray(icon_size=12),
+                widget.Sep(**separator_options),
                 widget.CPUGraph(graph_color='FF9AA0',
                                 fill_color='7D2F3E',
-                                ),
+                ),
                 widget.MemoryGraph(graph_color='FF0000',
                                    fill_color='A12231',
-                                   ),
+                ),
                 widget.NetGraph(graph_color='FF7753',
                                 fill_color='9C382B',
-                                ),
+                ),
                 widget.HDDBusyGraph(device='sdb',
                                     graph_color='FAD42E',
                                     fill_color='9E6B26',
-                                    ),
-                #widget.Cmus(),
-                widget.Wlan(interface='wlp3s0'),
-                widget.Volume(),
-                widget.Systray(),
-                widget.Clock(format='%a, %d of %b, %H:%M:%S'),
-                #widget.CurrentLayoutIcon(scale=0.5,
-                #                         foreground='A73F32'),
-                #widget.Wallpaper(directory='/home/shared/wallpapers/'),
-                #widget.QuickExit(),
+                ),
+                widget.Sep(**separator_options),
+                widget.Clock(format='%a %d of %b %H:%M:%S'),
             ],
-            size=24,
+            size=20,
             # config
             opacity=0.9,
             margin=[3, 5, 3, 5],
-            background='#171615')
+            background='171615')
 
-
-bottom_bar = bar.Bar([
-                widget.Cmus(foreground=widget_defaults['foreground'])
-            ],
-            15,
-            opacity=1,
-            margin=[0, 250, 10, 250],
-            background='#171615',
-            align='center')
 
 
 screens = [ 
@@ -247,6 +257,12 @@ floating_layout = layout.Floating(float_rules=[
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+
+@hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.call([home])
+    pass
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
