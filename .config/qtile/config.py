@@ -90,7 +90,7 @@ keys = [
     Key([], "XF86AudioStop", lazy.spawn("cmus-remote -s")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +1%")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -1%")),
-    Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute 0 toggle")), 
+    Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute @DEFAULT_SINK@ toggle")), 
 ]
 
 groups = [Group(i) for i in "12345678"]
@@ -111,7 +111,7 @@ for i in groups:
 
 layout_params = dict(
     margin=6, 
-    border_focus='DB5247', #'A33A4E', #'A73F32', #A0ffff',
+    border_focus='EA73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal='222120',
     border_width=2
 )
