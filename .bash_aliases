@@ -10,6 +10,7 @@ alias lb='lsblk -f'
 
 # git aliases
 alias gits='git status -s'
+alias gitss='git status -s | head -n30'
 alias gitl='git log --oneline'
 alias gitt='git log --format=oneline --graph --all'
 alias gitr='git rev-parse --short HEAD'
