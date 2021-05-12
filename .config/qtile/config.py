@@ -88,8 +88,8 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn("cmus-remote -n")),
     Key([], "XF86AudioPrev", lazy.spawn("cmus-remote -r")),
     Key([], "XF86AudioStop", lazy.spawn("cmus-remote -s")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +5%")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -5%")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +1%")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -1%")),
     Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute 0 toggle")), 
 ]
 
