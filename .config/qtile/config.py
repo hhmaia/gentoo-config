@@ -38,6 +38,8 @@ my_screenshotdir = '/home/gentoo/henrique/Screenshots/'
 my_print_cmd = "sh -c 'import -window root " +\
                 my_screenshotdir + "$(date +%Y%m%d%H%M%S).png'"
 
+my_print_cmd_mod = "sh -c 'import " + my_screenshotdir + "$(date +%Y%m%d%H%M%S).png'"
+
 my_vol_cmd = "/home/gentoo/henrique/.config/qtile/get_volume.sh"
 my_rofi_cmd = "rofi -theme /usr/share/rofi/themes/arthur.rasi \
                 -show drun \
@@ -80,8 +82,9 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
     Key([mod, 'shift'], "r", lazy.spawn(my_rofi_cmd)),
-    Key([mod], "p", lazy.spawn('xrandr --output eDP1 --off')),
+    Key([mod], "p", lazy.spawn('xrandr --output eDP1 --off'), lazy.restart()),
     Key([], "Print", lazy.spawn(my_print_cmd)),
+    Key([mod], "Print", lazy.spawn(my_print_cmd_mod)),
 
     # Media keys setup
     Key([], "XF86AudioPlay", lazy.spawn("cmus-remote -u")),
@@ -91,7 +94,9 @@ keys = [
     Key([], "XF86AudioPrev", lazy.spawn("cmus-remote -r")),
     Key([], "XF86AudioStop", lazy.spawn("cmus-remote -s")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +1%")),
+    Key([mod], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +5%")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -1%")),
+    Key([mod], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -5%")),
     Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute @DEFAULT_SINK@ toggle")),
 ]
 
