@@ -203,7 +203,7 @@ mybar = bar.Bar([
                                     fill_color='9E6B26',
                 ),
             ],
-            size=20,
+            size=24,
             # config
             opacity=0.9,
             margin=[3, 5, 3, 5],
