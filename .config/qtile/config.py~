@@ -180,7 +180,7 @@ mybar = bar.Bar([
                 widget.Sep(**separator_options),
                 widget.Prompt(),
                 widget.Sep(**separator_options),
-                widget.WindowName(foreground=colors['text_highlight']),
+                widget.WindowName(foreground=widget_defaults['foreground']),
                 widget.Cmus(foreground=widget_defaults['foreground'],
                             play_color=colors['text_highlight'],
                             align='right',
