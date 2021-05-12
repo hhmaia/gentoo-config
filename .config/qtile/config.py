@@ -86,6 +86,8 @@ keys = [
     # Media keys setup
     Key([], "XF86AudioPlay", lazy.spawn("cmus-remote -u")),
     Key([], "XF86AudioNext", lazy.spawn("cmus-remote -n")),
+    Key([mod], "XF86AudioNext", lazy.spawn("cmus-remote --seek +10s")),
+    Key([mod], "XF86AudioPrev", lazy.spawn("cmus-remote --seek -10s")),
     Key([], "XF86AudioPrev", lazy.spawn("cmus-remote -r")),
     Key([], "XF86AudioStop", lazy.spawn("cmus-remote -s")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +1%")),
