@@ -45,6 +45,7 @@ my_rofi_cmd = "rofi -theme /usr/share/rofi/themes/arthur.rasi \
                 -show drun \
                 -terminal " + myterm
 
+# >>> keys section >>>
 keys = [
     # Switch between windows in current stack pane
     Key([mod], "j", lazy.layout.down()),
@@ -99,7 +100,10 @@ keys = [
     Key([mod], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -5%")),
     Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute @DEFAULT_SINK@ toggle")),
 ]
+# <<< keys section <<<
 
+
+# >>> groups section >>>
 groups = [Group(i) for i in "12345678"]
 
 for i in groups:
@@ -113,9 +117,10 @@ for i in groups:
         # # mod1 + shift + letter of group = move focused window to group
         #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
     ])
+# <<< groups section <<<
+
 
 # >>> layouts section >>>
-
 layout_params = dict(
     margin=6,
     border_focus='EA73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
@@ -139,11 +144,11 @@ layouts = [
 ]
 # <<< layouts section <<<
 
+
 colors = {
     'text_highlight' : 'A73F32',
     'text_normal' : 'EDC29A',
 }
-
 
 widget_defaults = dict(
     font='Source Code Pro',
@@ -161,7 +166,6 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-
 separator_options = dict(
     foreground=widget_defaults['border_color'],
     linewidth=2,
@@ -169,47 +173,51 @@ separator_options = dict(
     padding=3,
 )
 
-mybar = bar.Bar([
-                widget.Image(filename = "~/.config/qtile/gentoo.png",
-                             scale = True,
-                             margin=5,
-                ),
-                widget.Sep(**separator_options),
-                widget.Clock(format='%a %d of %b %H:%M:%S'),
-                widget.Sep(**separator_options),
-                widget.CurrentLayout(foreground=colors['text_highlight'],),
-                widget.GroupBox(active='EDC29A',
-                                block_highlight_text_color=colors['text_highlight'],
-                                this_current_screen_border=colors['text_highlight'],
-                                borderwidth=1,
-                                disable_drag=True,
-                ),
-                widget.Sep(**separator_options),
-                widget.Prompt(),
-                widget.Sep(**separator_options),
-                widget.WindowName(foreground=colors['text_highlight']),
-                widget.Cmus(foreground=widget_defaults['foreground'],
-                            play_color=colors['text_highlight'],
-                            align='right',
-                ),
-                widget.Sep(**separator_options),
-                widget.Volume(),
-                widget.Systray(icon_size=12),
-                widget.Sep(**separator_options),
-                widget.CPUGraph(graph_color='FF9AA0',
-                                fill_color='7D2F3E',
-                ),
-                widget.MemoryGraph(graph_color='FF0000',
-                                   fill_color='A12231',
-                ),
-                widget.NetGraph(graph_color='FF7753',
-                                fill_color='9C382B',
-                ),
-                widget.HDDBusyGraph(device='sdb',
-                                    graph_color='FAD42E',
-                                    fill_color='9E6B26',
-                ),
-            ],
+widgets_list_main_bar = [
+    widget.Image(filename = "~/.config/qtile/gentoo.png",
+            scale = True,
+            margin=5,
+            ),
+    widget.Sep(**separator_options),
+    widget.Clock(format='%a %d of %b %H:%M:%S'),
+    widget.Sep(**separator_options),
+    widget.CurrentLayout(foreground=colors['text_highlight'],),
+    widget.GroupBox(active='EDC29A',
+            block_highlight_text_color=colors['text_highlight'],
+            this_current_screen_border=colors['text_highlight'],
+            borderwidth=1,
+            disable_drag=True,
+            ),
+    widget.Sep(**separator_options),
+    widget.Prompt(),
+    widget.Sep(**separator_options),
+    widget.WindowName(foreground=colors['text_highlight']),
+    widget.Cmus(foreground=widget_defaults['foreground'],
+            play_color=colors['text_highlight'],
+            align='right',
+            ),
+    widget.Sep(**separator_options),
+    widget.Volume(),
+    widget.Systray(icon_size=12),
+    widget.Sep(**separator_options),
+    widget.CPUGraph(graph_color='FF9AA0',
+            fill_color='7D2F3E',
+            ),
+    widget.MemoryGraph(graph_color='FF0000',
+            fill_color='A12231',
+            ),
+    widget.NetGraph(graph_color='FF7753',
+            fill_color='9C382B',
+            ),
+    widget.HDDBusyGraph(device='sdb',
+            graph_color='FAD42E',
+            fill_color='9E6B26',
+            ),
+]
+
+
+mybar = bar.Bar(
+            widgets_list_main_bar,
             size=24,
             # config
             opacity=0.9,
