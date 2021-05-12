@@ -41,7 +41,7 @@ my_print_cmd = "sh -c 'import -window root " +\
 my_vol_cmd = "/home/gentoo/henrique/.config/qtile/get_volume.sh"
 my_rofi_cmd = "rofi -theme /usr/share/rofi/themes/arthur.rasi \
                 -show drun \
-                -terminal " + myterm 
+                -terminal " + myterm
 
 keys = [
     # Switch between windows in current stack pane
@@ -82,7 +82,7 @@ keys = [
     Key([mod, 'shift'], "r", lazy.spawn(my_rofi_cmd)),
     Key([mod], "p", lazy.spawn('xrandr --output eDP1 --off')),
     Key([], "Print", lazy.spawn(my_print_cmd)),
-   
+
     # Media keys setup
     Key([], "XF86AudioPlay", lazy.spawn("cmus-remote -u")),
     Key([], "XF86AudioNext", lazy.spawn("cmus-remote -n")),
@@ -90,7 +90,7 @@ keys = [
     Key([], "XF86AudioStop", lazy.spawn("cmus-remote -s")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +1%")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -1%")),
-    Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute @DEFAULT_SINK@ toggle")), 
+    Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute @DEFAULT_SINK@ toggle")),
 ]
 
 groups = [Group(i) for i in "12345678"]
@@ -110,7 +110,7 @@ for i in groups:
 # >>> layouts section >>>
 
 layout_params = dict(
-    margin=6, 
+    margin=6,
     border_focus='EA73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal='222120',
     border_width=2
@@ -134,7 +134,7 @@ layouts = [
 
 colors = {
     'text_highlight' : 'A73F32',
-    'text_normal' : 'EDC29A', 
+    'text_normal' : 'EDC29A',
 }
 
 
@@ -211,9 +211,10 @@ mybar = bar.Bar([
 
 
 
-screens = [ 
+screens = [
     Screen(top=mybar,
-           wallpaper='/home/shared/wallpapers/nebula.jpg',
+           #wallpaper='/home/shared/wallpapers/nebula.jpg',
+           wallpaper='/home/shared/wallpapers/wp4199384.png',
            wallpaper_mode='fill',),
 
     Screen(top=mybar,
@@ -236,23 +237,26 @@ main = None
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=[
-    # Run the utility of `xprop` to see the wm class and name of an X client.
-    {'wmclass': 'confirm'},
-    {'wmclass': 'dialog'},
-    {'wmclass': 'download'},
-    {'wmclass': 'error'},
-    {'wmclass': 'file_progress'},
-    {'wmclass': 'notification'},
-    {'wmclass': 'splash'},
-    {'wmclass': 'toolbar'},
-    {'wmclass': 'confirmreset'},  # gitk
-    {'wmclass': 'makebranch'},  # gitk
-    {'wmclass': 'maketag'},  # gitk
-    {'wname': 'branchdialog'},  # gitk
-    {'wname': 'pinentry'},  # GPG key password entry
-    {'wmclass': 'ssh-askpass'},  # ssh-askpass
-])
+floating_layout = layout.Floating(
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        {'wmclass': 'confirm'},
+        {'wmclass': 'dialog'},
+        {'wmclass': 'download'},
+        {'wmclass': 'error'},
+        {'wmclass': 'file_progress'},
+        {'wmclass': 'notification'},
+        {'wmclass': 'splash'},
+        {'wmclass': 'toolbar'},
+        {'wmclass': 'confirmreset'},  # gitk
+        {'wmclass': 'makebranch'},  # gitk
+        {'wmclass': 'maketag'},  # gitk
+        {'wname': 'branchdialog'},  # gitk
+        {'wname': 'pinentry'},  # GPG key password entry
+        {'wmclass': 'ssh-askpass'},  # ssh-askpass
+    ],
+    **layout_params
+)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
