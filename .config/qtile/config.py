@@ -144,7 +144,7 @@ widget_defaults = dict(
     padding=3,
     foreground='EDC29A',
     background='171615',
-    border_color='323130',
+    border_color='424140',
 
     # graph monitor
     line_width=2,

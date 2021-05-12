@@ -1,3 +1,3 @@
 #!/bin/sh
 nm-applet &
-xset r rate 600 100
+xset r rate 600 100 &
