@@ -43,7 +43,9 @@ my_print_cmd_mod = "sh -c 'import " + my_screenshotdir + "$(date +%Y%m%d%H%M%S).
 my_vol_cmd = "/home/gentoo/henrique/.config/qtile/get_volume.sh"
 my_rofi_cmd = "rofi -theme /usr/share/rofi/themes/arthur.rasi \
                 -show drun \
+                -width 20 \
                 -terminal " + myterm
+
 
 # >>> keys section >>>
 keys = [
@@ -59,6 +61,24 @@ keys = [
     Key([mod, "control"], "h", lazy.layout.shuffle_left()),
     Key([mod, "control"], "l", lazy.layout.shuffle_right()),
 
+    Key([mod, "mod1"], "k", lazy.layout.grow()),
+    Key([mod, "mod1"], "j", lazy.layout.shrink()),
+    Key([mod, "mod1"], "h", lazy.layout.normalize()),
+    Key([mod, "mod1"], "l", lazy.layout.maximize()),
+
+    Key([mod, "shift"], "k", lazy.layout.grow_up()),
+    Key([mod, "shift"], "j", lazy.layout.grow_down()),
+    Key([mod, "shift"], "h", lazy.layout.grow_left()),
+    Key([mod, "shift"], "l", lazy.layout.grow_right()),
+
+    Key([mod, "mod1", "control"], "k", lazy.layout.flip_up()),
+    Key([mod, "mod1", "control"], "j", lazy.layout.flip_down()),
+    Key([mod, "mod1", "control"], "h", lazy.layout.flip_left()),
+    Key([mod, "mod1", "control"], "l", lazy.layout.flip_right()),
+
+    Key([mod, "shift"], "BackSpace", lazy.layout.reset()),
+    Key([mod], "equal", lazy.layout.increase_ratio()),
+    Key([mod], "minus", lazy.layout.decrease_ratio()),
     # Switch window focus to other pane(s) of stack
     Key([mod], "space", lazy.layout.next()),
 
@@ -94,9 +114,9 @@ keys = [
     Key([mod], "XF86AudioPrev", lazy.spawn("cmus-remote --seek -10s")),
     Key([], "XF86AudioPrev", lazy.spawn("cmus-remote -r")),
     Key([], "XF86AudioStop", lazy.spawn("cmus-remote -s")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +1%")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +2%")),
     Key([mod], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +5%")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -1%")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -2%")),
     Key([mod], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -5%")),
     Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute @DEFAULT_SINK@ toggle")),
 ]
@@ -122,18 +142,18 @@ for i in groups:
 
 # >>> layouts section >>>
 layout_params = dict(
-    margin=6,
+    margin=5,
     border_focus='EA73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal='222120',
-    border_width=2
+    border_width=1
 )
 
 layouts = [
     layout.MonadTall(**layout_params),
     layout.Max(),
-    layout.Stack(num_stacks=2, **layout_params),
-    layout.Bsp(**layout_params),
     layout.Columns(**layout_params),
+    layout.Bsp(**layout_params),
+    layout.Stack(num_stacks=2, **layout_params),
     layout.Matrix(**layout_params),
     #layout.MonadWide(**layout_params),
     #layout.RatioTile(**layout_params),
@@ -160,7 +180,7 @@ widget_defaults = dict(
 
     # graph monitor
     line_width=2,
-    frequency=0.1,
+    frequency=0.2,
     start_pos='top',
     samples=5000
 )
@@ -221,18 +241,29 @@ mybar = bar.Bar(
             size=24,
             # config
             opacity=0.9,
+            #margin=[0,0,0,0],
             margin=[3, 5, 3, 5],
             background='171615')
 
 
+widgets_bar2 = [
+    widget.Clock()
+]
+
+mybar2 = bar.Bar(
+            widgets_bar2,
+            size=24,
+            # config
+            opacity=0.9,
+            margin=[3, 5, 3, 5],
+            background='171615')
+
 
 screens = [
     Screen(top=mybar,
-           #wallpaper='/home/shared/wallpapers/nebula.jpg',
-           wallpaper='/home/shared/wallpapers/wp4199384.png',
+           wallpaper='/home/shared/wallpapers/nebula.jpg',
            wallpaper_mode='fill',),
-
-    Screen(top=mybar,
+    Screen(top=mybar2,
            wallpaper='/home/shared/wallpapers/nebula.jpg',
            wallpaper_mode='fill',),
 ]
