@@ -261,10 +261,10 @@ mybar2 = bar.Bar(
 
 screens = [
     Screen(top=mybar,
-           wallpaper='/home/shared/wallpapers/nebula.jpg',
+           wallpaper='~/.wallpapers/nebula.jpg',
            wallpaper_mode='fill',),
     Screen(top=mybar2,
-           wallpaper='/home/shared/wallpapers/nebula.jpg',
+           wallpaper='~/.wallpapers/nebula.jpg',
            wallpaper_mode='fill',),
 ]
 
