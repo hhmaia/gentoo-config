@@ -142,10 +142,10 @@ for i in groups:
 
 # >>> layouts section >>>
 layout_params = dict(
-    margin=5,
+    margin=20,
     border_focus='EA73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal='222120',
-    border_width=1
+    border_width=2
 )
 
 layouts = [
@@ -261,10 +261,10 @@ mybar2 = bar.Bar(
 
 screens = [
     Screen(top=mybar,
-           wallpaper='~/.wallpapers/nebula.jpg',
+           wallpaper='~/.wallpapers/nebula2.png',
            wallpaper_mode='fill',),
     Screen(top=mybar2,
-           wallpaper='~/.wallpapers/nebula.jpg',
+           wallpaper='/.wallpapers/nebula.jpg',
            wallpaper_mode='fill',),
 ]
 
