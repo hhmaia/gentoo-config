@@ -31,6 +31,7 @@ from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 
 from typing import List  # noqa: F401
+#from libqtile import qtile
 
 mod = "mod4"
 myterm = "alacritty"
@@ -46,6 +47,13 @@ my_rofi_cmd = "rofi -theme /usr/share/rofi/themes/arthur.rasi \
                 -width 20 \
                 -terminal " + myterm
 
+def open_calendar(qtile):  # spawn calendar widget
+    qtile.cmd_spawn('xcalendar')
+
+def close_calendar(qtile):  # kill calendar widget
+    qtile.cmd_spawn('killall xcalendar')
+
+# add widget with callbacks somewhere
 
 # >>> keys section >>>
 keys = [
@@ -142,10 +150,10 @@ for i in groups:
 
 # >>> layouts section >>>
 layout_params = dict(
-    margin=20,
+    margin=10,
     border_focus='EA73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal='222120',
-    border_width=2
+    border_width=1
 )
 
 layouts = [
@@ -199,7 +207,15 @@ widgets_list_main_bar = [
             margin=5,
             ),
     widget.Sep(**separator_options),
-    widget.Clock(format='%a %d of %b %H:%M:%S'),
+    widget.Clock(format='%a %d of %b %H:%M:%S',
+                 mouse_callbacks={
+                    'Button1': open_calendar,
+                    'Button3': close_calendar}),
+    widget.Sep(**separator_options),
+    widget.Pomodoro(**widget_defaults,
+                length_pomodori=0.2,
+                length_short_break=0.1,
+                length_long_break=0.5),
     widget.Sep(**separator_options),
     widget.CurrentLayout(foreground=colors['text_highlight'],),
     widget.GroupBox(active='EDC29A',
@@ -242,7 +258,7 @@ mybar = bar.Bar(
             # config
             opacity=0.9,
             #margin=[0,0,0,0],
-            margin=[3, 5, 3, 5],
+            margin=[3, 10, 3, 10],
             background='171615')
 
 
@@ -300,6 +316,8 @@ floating_layout = layout.Floating(
         {'wname': 'branchdialog'},  # gitk
         {'wname': 'pinentry'},  # GPG key password entry
         {'wmclass': 'ssh-askpass'},  # ssh-askpass
+        {'wmclass': 'xcalendar'}, # xcalendar
+        {'wmclass': 'dayEditor'} # xcalendar day editor
     ],
     **layout_params
 )
@@ -310,7 +328,6 @@ focus_on_window_activation = "smart"
 def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.call([home])
-    pass
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
@@ -320,4 +337,4 @@ def autostart():
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "qtile"
+wmname = "LG3D"
