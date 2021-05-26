@@ -22,7 +22,7 @@ font:
     family: Source Code Pro
     style: Italic
 
-  size: 9.0
+  size: 8.5
 
 
 scrolling:
@@ -67,7 +67,7 @@ colors:
 
 draw_bold_text_with_bright_colors: true
 save_to_clipboard: true
-background_opacity: 0.89
+background_opacity: 0.88
 debug:
   # Display the time it takes to redraw each frame.
   render_timer: false

@@ -16,8 +16,10 @@ alias gitt='git log --format=oneline --graph --all'
 alias gitr='git rev-parse --short HEAD'
 
 # some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -l --group-directories-first'
+alias la='ls -A --group-directories-first'
+alias l='ls -CF --group-directories-first'
 alias lsa='ls -lahF --group-directories-first'
+alias tree='tree -C'
+
 alias find_modules='find /lib/modules/$(uname -r)/ -type f -name "*.ko*"'
