@@ -34,26 +34,19 @@ from typing import List  # noqa: F401
 #from libqtile import qtile
 
 mod = "mod4"
-myterm = "alacritty"
-my_screenshotdir = '/home/gentoo/henrique/Screenshots/'
-my_print_cmd = "sh -c 'import -window root " +\
-                my_screenshotdir + "$(date +%Y%m%d%H%M%S).png'"
+default_term = "alacritty"
 
-my_print_cmd_mod = "sh -c 'import " + my_screenshotdir + "$(date +%Y%m%d%H%M%S).png'"
+# >>> screenshot related >>>
+ss_dir = '/home/gentoo/henrique/Screenshots/'
+ss_pattern = "$(date +%Y%m%d%H%M%S).png'"
+ss_cmd = "sh -c 'import -window root " + ss_dir + ss_pattern
+ss_cmd_mod = "sh -c 'import " + ss_dir + ss_pattern
+# <<< screenshot related <<<
 
-my_vol_cmd = "/home/gentoo/henrique/.config/qtile/get_volume.sh"
-my_rofi_cmd = "rofi -theme /usr/share/rofi/themes/arthur.rasi \
+rofi_cmd = "rofi -theme /usr/share/rofi/themes/arthur.rasi \
                 -show drun \
                 -width 20 \
-                -terminal " + myterm
-
-def open_calendar(qtile):  # spawn calendar widget
-    qtile.cmd_spawn('xcalendar')
-
-def close_calendar(qtile):  # kill calendar widget
-    qtile.cmd_spawn('killall xcalendar')
-
-# add widget with callbacks somewhere
+                -terminal " + default_term
 
 # >>> keys section >>>
 keys = [
@@ -98,7 +91,7 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn(myterm)),
+    Key([mod], "Return", lazy.spawn(default_term)),
     Key([mod], 'f', lazy.window.toggle_floating()),
     Key([mod], 'F11', lazy.window.toggle_fullscreen()),
 
@@ -110,10 +103,10 @@ keys = [
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
-    Key([mod, 'shift'], "r", lazy.spawn(my_rofi_cmd)),
+    Key([mod, 'shift'], "r", lazy.spawn(rofi_cmd)),
     Key([mod], "p", lazy.spawn('xrandr --output eDP1 --off'), lazy.restart()),
-    Key([], "Print", lazy.spawn(my_print_cmd)),
-    Key([mod], "Print", lazy.spawn(my_print_cmd_mod)),
+    Key([], "Print", lazy.spawn(ss_cmd)),
+    Key([mod], "Print", lazy.spawn(ss_cmd_mod)),
 
     # Media keys setup
     Key([], "XF86AudioPlay", lazy.spawn("cmus-remote -u")),
@@ -132,37 +125,57 @@ keys = [
 
 
 # >>> groups section >>>
-groups = [Group(i) for i in "12345678"]
+g_symbols = '☿♀♁♂♃♄⛢♆'
+groups = [Group(name) for name in g_symbols]
 
-for i in groups:
+for g in groups:
     keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
-
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+        Key([mod], str(g_symbols.index(g.name) + 1),
+            lazy.group[g.name].toscreen()),
+        Key([mod, 'control'], str(g_symbols.index(g.name) + 1),
+            lazy.window.togroup(g.name, switch_group=False)),
+        Key([mod, 'shift'], str(g_symbols.index(g.name) + 1),
+            lazy.window.togroup(g.name, switch_group=True)),
     ])
+
+
+#groups = [Group(i) for i in "12345678"]
+
+#for i in groups:
+#    keys.extend([
+#        # mod1 + letter of group = switch to group
+#        Key([mod], i.name, lazy.group[i.name].toscreen()),
+#
+#        # mod1 + shift + letter of group = switch to & move focused window to group
+#        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True)),
+#        # Or, use below if you prefer not to switch to that group.
+#        # # mod1 + shift + letter of group = move focused window to group
+#        #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+#    ])
 # <<< groups section <<<
 
+colors = {
+    'text_highlight' : 'A73F32',
+    'text_normal' : 'EDC29A',
+}
 
 # >>> layouts section >>>
 layout_params = dict(
-    margin=10,
-    border_focus='EA73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
+    margin=8,
+    border_focus=colors['text_highlight'], #'A73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal='222120',
-    border_width=1
+    border_width=2
 )
 
 layouts = [
     layout.MonadTall(**layout_params),
     layout.Max(),
-    layout.Columns(**layout_params),
-    layout.Bsp(**layout_params),
-    layout.Stack(num_stacks=2, **layout_params),
+    layout.Bsp(**layout_params,
+               fair=False,),
     layout.Matrix(**layout_params),
+
+    #layout.Columns(**layout_params),
+    #layout.Stack(num_stacks=2, **layout_params),
     #layout.MonadWide(**layout_params),
     #layout.RatioTile(**layout_params),
     #layout.Tile(**layout_params),
@@ -173,57 +186,68 @@ layouts = [
 # <<< layouts section <<<
 
 
-colors = {
-    'text_highlight' : 'A73F32',
-    'text_normal' : 'EDC29A',
-}
+graph_monitor_options = dict(
+    line_width=2,
+    frequency=0.2,
+    start_pos='top',
+    samples=5000,
+    margin_x=1,
+    margin_y=1,
+    border_width=2
+)
 
 widget_defaults = dict(
     font='Source Code Pro',
     fontsize=9,
-    padding=3,
-    foreground='EDC29A',
+    padding=2,
+    foreground=colors['text_normal'],
     background='171615',
     border_color='424140',
-
-    # graph monitor
-    line_width=2,
-    frequency=0.2,
-    start_pos='top',
-    samples=5000
+    **graph_monitor_options
 )
+
 extension_defaults = widget_defaults.copy()
 
 separator_options = dict(
     foreground=widget_defaults['border_color'],
     linewidth=2,
     size_percent=50,
-    padding=3,
+    padding=4,
 )
 
-widgets_list_main_bar = [
+groupbox_options = dict(
+    active='EDC29A',
+    font='Symbola',
+    fontsize=10,
+    block_highlight_text_color=colors['text_highlight'],
+    this_current_screen_border=colors['text_highlight'],
+    borderwidth=1,
+    disable_drag=True
+)
+
+clock_options = dict(
+    format='%a %d of %b %H:%M:%S',
+    mouse_callbacks={
+        'Button1' : lambda qtile: qtile.cmd_spawn('xcalendar'),
+        'Button3': lambda qtile: qtile.cmd_spawn('killall xcalendar')
+    }
+)
+
+widgets_main = [
     widget.Image(filename = "~/.config/qtile/gentoo.png",
             scale = True,
             margin=5,
             ),
     widget.Sep(**separator_options),
-    widget.Clock(format='%a %d of %b %H:%M:%S',
-                 mouse_callbacks={
-                    'Button1': open_calendar,
-                    'Button3': close_calendar}),
-    widget.Sep(**separator_options),
-    widget.Pomodoro(**widget_defaults,
-                length_pomodori=0.2,
-                length_short_break=0.1,
-                length_long_break=0.5),
+    widget.Clock(**clock_options),
+    #widget.Sep(**separator_options),
+    #widget.Pomodoro(**widget_defaults,
+    #            length_pomodori=20,
+    #            length_short_break=5,
+    #            length_long_break=20),
     widget.Sep(**separator_options),
     widget.CurrentLayout(foreground=colors['text_highlight'],),
-    widget.GroupBox(active='EDC29A',
-            block_highlight_text_color=colors['text_highlight'],
-            this_current_screen_border=colors['text_highlight'],
-            borderwidth=1,
-            disable_drag=True,
-            ),
+    widget.GroupBox(**groupbox_options),
     widget.Sep(**separator_options),
     widget.Prompt(),
     widget.Sep(**separator_options),
@@ -236,10 +260,11 @@ widgets_list_main_bar = [
     widget.Volume(),
     widget.Systray(icon_size=12),
     widget.Sep(**separator_options),
+
     widget.CPUGraph(graph_color='FF9AA0',
             fill_color='7D2F3E',
             ),
-    widget.MemoryGraph(graph_color='FF0000',
+    widget.MemoryGraph(graph_color='FF4000',
             fill_color='A12231',
             ),
     widget.NetGraph(graph_color='FF7753',
@@ -251,36 +276,35 @@ widgets_list_main_bar = [
             ),
 ]
 
-
-mybar = bar.Bar(
-            widgets_list_main_bar,
-            size=24,
-            # config
-            opacity=0.9,
-            #margin=[0,0,0,0],
-            margin=[3, 10, 3, 10],
-            background='171615')
-
-
 widgets_bar2 = [
-    widget.Clock()
+    widget.Image(filename = "~/.config/qtile/gentoo.png",
+            scale = True,
+            margin=5,
+            ),
+    widget.Sep(**separator_options),
+    widget.Clock(**clock_options),
+    widget.Sep(**separator_options),
+    widget.GroupBox(**groupbox_options),
+    widget.Sep(**separator_options),
+    widget.WindowName(foreground=colors['text_highlight']),
 ]
 
-mybar2 = bar.Bar(
-            widgets_bar2,
-            size=24,
-            # config
-            opacity=0.9,
-            margin=[3, 5, 3, 5],
-            background='171615')
+bar_defaults = dict(size=24,
+                    opacity=0.95,
+                    margin=[3, 8, 0, 8],
+                    background='171615')
 
+bar_screen1 = bar.Bar(widgets=widgets_main,
+                      **bar_defaults)
+bar_screen2 = bar.Bar(widgets=widgets_bar2,
+                      **bar_defaults)
 
 screens = [
-    Screen(top=mybar,
-           wallpaper='~/.wallpapers/nebula2.png',
+    Screen(top=bar_screen1,
+           wallpaper='/home/duo/repos/wallpapers/0114.jpg',
            wallpaper_mode='fill',),
-    Screen(top=mybar2,
-           wallpaper='/.wallpapers/nebula.jpg',
+    Screen(top=bar_screen2,
+           wallpaper='~/.wallpapers/citadel2.png',
            wallpaper_mode='fill',),
 ]
 
@@ -323,6 +347,7 @@ floating_layout = layout.Floating(
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+#reconfigure_screens = True
 
 @hook.subscribe.startup_once
 def autostart():
