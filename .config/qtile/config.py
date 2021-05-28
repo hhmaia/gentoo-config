@@ -43,9 +43,10 @@ ss_cmd = "sh -c 'import -window root " + ss_dir + ss_pattern
 ss_cmd_mod = "sh -c 'import " + ss_dir + ss_pattern
 # <<< screenshot related <<<
 
-rofi_cmd = "rofi -theme /usr/share/rofi/themes/arthur.rasi \
-                -show drun \
+rofi_cmd = "rofi -show drun \
                 -width 20 \
+                -show-icons \
+                -theme /usr/share/rofi/themes/arthur.rasi \
                 -terminal " + default_term
 
 # >>> keys section >>>
@@ -228,16 +229,20 @@ groupbox_options = dict(
 clock_options = dict(
     format='%a %d of %b %H:%M:%S',
     mouse_callbacks={
-        'Button1' : lambda qtile: qtile.cmd_spawn('xcalendar'),
+        'Button1': lambda qtile: qtile.cmd_spawn('xcalendar'),
         'Button3': lambda qtile: qtile.cmd_spawn('killall xcalendar')
     }
 )
 
 widgets_main = [
-    widget.Image(filename = "~/.config/qtile/gentoo.png",
-            scale = True,
-            margin=5,
-            ),
+    widget.Image(filename="~/.config/qtile/gentoo.png",
+                 scale=True,
+                 margin_x=2,
+                 margin_y=5,
+                 mouse_callbacks={
+                    'Button1': lambda qtile: qtile.cmd_spawn(rofi_cmd)
+                 }
+                 ),
     widget.Sep(**separator_options),
     widget.Clock(**clock_options),
     #widget.Sep(**separator_options),
@@ -257,7 +262,9 @@ widgets_main = [
             align='right',
             ),
     widget.Sep(**separator_options),
+    widget.TextBox('🔊', fontsize=11),
     widget.Volume(),
+    widget.Sep(**separator_options),
     widget.Systray(icon_size=12),
     widget.Sep(**separator_options),
 
@@ -290,7 +297,7 @@ widgets_bar2 = [
 ]
 
 bar_defaults = dict(size=24,
-                    opacity=0.95,
+                    opacity=.99,
                     margin=[3, 8, 0, 8],
                     background='171615')
 
