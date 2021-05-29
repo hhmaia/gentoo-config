@@ -29,6 +29,7 @@ import time
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
+#from powerline.bindings.qtile.widget import PowerlineTextBox
 
 from typing import List  # noqa: F401
 #from libqtile import qtile
@@ -77,6 +78,7 @@ keys = [
     Key([mod, "mod1", "control"], "j", lazy.layout.flip_down()),
     Key([mod, "mod1", "control"], "h", lazy.layout.flip_left()),
     Key([mod, "mod1", "control"], "l", lazy.layout.flip_right()),
+    Key([mod, "shift"], 'f', lazy.layout.flip()),
 
     Key([mod, "shift"], "BackSpace", lazy.layout.reset()),
     Key([mod], "equal", lazy.layout.increase_ratio()),
@@ -194,7 +196,7 @@ graph_monitor_options = dict(
     samples=5000,
     margin_x=1,
     margin_y=1,
-    border_width=2
+    border_width=1
 )
 
 widget_defaults = dict(
@@ -211,7 +213,7 @@ extension_defaults = widget_defaults.copy()
 
 separator_options = dict(
     foreground=widget_defaults['border_color'],
-    linewidth=2,
+    linewidth=1,
     size_percent=50,
     padding=4,
 )
