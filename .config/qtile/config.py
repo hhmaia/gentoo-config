@@ -171,12 +171,11 @@ layout_params = dict(
 )
 
 layouts = [
-    layout.MonadTall(**layout_params),
-    layout.Max(),
     layout.Bsp(**layout_params,
                fair=False,),
-    layout.Matrix(**layout_params),
-
+    layout.Max(),
+    layout.MonadTall(**layout_params),
+    #layout.Matrix(**layout_params),
     #layout.Columns(**layout_params),
     #layout.Stack(num_stacks=2, **layout_params),
     #layout.MonadWide(**layout_params),
@@ -300,7 +299,7 @@ widgets_bar2 = [
 
 bar_defaults = dict(size=24,
                     opacity=.99,
-                    margin=[3, 8, 0, 8],
+                    margin=[0, 8, 0, 8],
                     background='171615')
 
 bar_screen1 = bar.Bar(widgets=widgets_main,
