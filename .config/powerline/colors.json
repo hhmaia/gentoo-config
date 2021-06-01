@@ -62,6 +62,23 @@
 		"skyblue1": 117,
 		"khaki1": 228,
 
+        "garuda:black":             0,
+        "garuda:gray":              1,
+        "garuda:magenta":           2,
+        "garuda:red":               3,
+        "garuda:orange":            4,
+        "garuda:gold":              5,
+        "garuda:yellow":            6,
+        "garuda:white":             7,
+        "garuda:black_dim":         8,
+        "garuda:gray_dim":          9,
+        "garuda:magenta_dim":       10,
+        "garuda:red_dim":           11,
+        "garuda:orange_dim":        12,
+        "garuda:gold_dim":          13,
+        "garuda:yellow_dim":        14,
+        "garuda:white_dim":         15,
+
 		"solarized:base03": [8, "002b36"],
 		"solarized:base02": [0, "073642"],
 		"solarized:base01": [10, "586e75"],
@@ -77,8 +94,25 @@
 		"solarized:violet": [13, "6c71c4"],
 		"solarized:blue": [4, "268bd2"],
 		"solarized:cyan": [6, "2aa198"],
-		"solarized:green": [2, "859900"]
+		"solarized:green": [2, "859900"],
+
+        "nord:background":      [0, "2E3440"],
+        "nord:foreground":      [0, "D8DEE9"],
+        "nord:dim_foreground":  [0, "2E3440"],
+        "nord:dim_foreground":  [0, "A5ABB6"],
+        "nord:text":            [0, "22E344"],
+        "nord:cursor":          [0, "D8DEE9"],
+        "nord:black":           [0, "3B4252"],
+        "nord:red":             [0, "BF616A"],
+        "nord:green":           [0, "A3BE8C"],
+        "nord:yellow":          [0, "EBCB8B"],
+        "nord:blue":            [0, "81A1C1"],
+        "nord:magenta":         [0, "B48EAD"],
+        "nord:cyan":            [0, "88C0D0"],
+        "nord:white":           [0, "E5E9F0"]
+
 	},
+
 	"gradients": {
 		"dark_GREEN_Orange_red": [
 			[22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 94, 94, 94, 94, 94, 94, 94, 88, 52],

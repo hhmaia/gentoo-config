@@ -1,5 +1,5 @@
 {
-	"name": "Solarized dark",
+	"name": "nord",
 	"groups": {
 		"information:additional":     { "fg": "solarized:base2", "bg": "solarized:base01", "attrs": [] },
 		"information:regular":        { "fg": "solarized:base3", "bg": "solarized:base01", "attrs": ["bold"] },
@@ -11,9 +11,9 @@
 		"background":                 { "fg": "solarized:base3", "bg": "solarized:base02", "attrs": [] },
 		"background:divider":         { "fg": "solarized:base1", "bg": "solarized:base02", "attrs": [] },
 		"user":                       { "fg": "solarized:base3", "bg": "solarized:blue", "attrs": ["bold"] },
-		"virtualenv":                 { "fg": "solarized:base0", "bg": "solarized:gray", "attrs": [] },
-		"branch":                     { "fg": "solarized:base1", "bg": "solarized:gray", "attrs": [] },
-		"branch_dirty":               { "fg": "solarized:yellow", "bg": "solarized:gray", "attrs": [] },
+		"virtualenv":                 { "fg": "nord:yellow", "bg": "nord:background", "attrs": [] },
+		"branch":                     { "fg": "nord:yellow", "bg": "nord:background", "attrs": [] },
+		"branch_dirty":               { "fg": "nord:yellow", "bg": "nord:background", "attrs": [] },
 		"branch_clean":               { "fg": "solarized:base1", "bg": "solarized:base02", "attrs": [] },
 		"stash":                      "branch_dirty",
 		"email_alert_gradient":       { "fg": "solarized:base3", "bg": "yellow_orange_red", "attrs": [] },
@@ -21,7 +21,7 @@
 		"cwd_2":                        "information:additional",
 		"cwd":                        { "fg": "solarized:base1", "bg": "solarized:base02", "attrs": [] },
 		"cwd:current_folder_2":         "information:regular",
-		"cwd:current_folder":         { "fg": "solarized:base1", "bg": "solarized:base02", "attrs": [] },
+		"cwd:current_folder":         { "fg": "nord:foreground", "bg": "nord:background", "attrs": [] },
 		"cwd:divider":                { "fg": "solarized:base1", "bg": "solarized:base02", "attrs": [] },
 		"network_load":               { "fg": "solarized:base1", "bg": "solarized:base03", "attrs": [] },
 		"network_load:divider":       "network_load",

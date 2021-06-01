@@ -157,16 +157,40 @@ for g in groups:
 #    ])
 # <<< groups section <<<
 
-colors = {
-    'text_highlight' : 'A73F32',
-    'text_normal' : 'EDC29A',
+garuda_colors = {
+    'text_highlight':   'A73F32',
+    'text_normal':      'EDC29A',
+    'background':       '171615',
+    'border':           '424140',
+    'border_inactive':  '222120',
+    'inactive':         '404040'
 }
+
+garuda_colors_alt = {
+    'text_highlight':   'EB3247',
+    'text_normal':      'EDC29A',
+    'background':       '171615',
+    'border':           '424140',
+    'border_inactive':  '222120',
+    'inactive':         '404040'
+}
+
+nord_colors = {
+    'background':       '2E3440',
+    'border':           '626160',
+    'text_normal':      'D8DEE9',
+    'text_highlight':   '81A1C1',
+    'border_inactive':  '222120',
+    'inactive':         '606060'
+}
+
+colors = garuda_colors_alt
 
 # >>> layouts section >>>
 layout_params = dict(
     margin=8,
     border_focus=colors['text_highlight'], #'A73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
-    border_normal='222120',
+    border_normal=colors['border_inactive'],
     border_width=2
 )
 
@@ -203,8 +227,8 @@ widget_defaults = dict(
     fontsize=9,
     padding=2,
     foreground=colors['text_normal'],
-    background='171615',
-    border_color='424140',
+    background=colors['background'],
+    border_color=colors['border'],
     **graph_monitor_options
 )
 
@@ -218,11 +242,12 @@ separator_options = dict(
 )
 
 groupbox_options = dict(
-    active='EDC29A',
+    active=colors['text_normal'],
     font='Symbola',
     fontsize=10,
     block_highlight_text_color=colors['text_highlight'],
     this_current_screen_border=colors['text_highlight'],
+    inactive=colors['inactive'],
     borderwidth=1,
     disable_drag=True
 )
@@ -269,16 +294,20 @@ widgets_main = [
     widget.Systray(icon_size=12),
     widget.Sep(**separator_options),
 
-    widget.CPUGraph(graph_color='FF9AA0',
+    widget.CPUGraph(
+            graph_color='FF9AA0',
             fill_color='7D2F3E',
             ),
-    widget.MemoryGraph(graph_color='FF4000',
+    widget.MemoryGraph(
+            graph_color='FF4000',
             fill_color='A12231',
             ),
-    widget.NetGraph(graph_color='FF7753',
+    widget.NetGraph(
+            graph_color='FF7753',
             fill_color='9C382B',
             ),
-    widget.HDDBusyGraph(device='sdb',
+    widget.HDDBusyGraph(
+            device='sdb',
             graph_color='FAD42E',
             fill_color='9E6B26',
             ),
@@ -299,8 +328,8 @@ widgets_bar2 = [
 
 bar_defaults = dict(size=24,
                     opacity=.99,
-                    margin=[0, 8, 0, 8],
-                    background='171615')
+                    margin=[3, 8, 0, 8],
+                    background=colors['background'])
 
 bar_screen1 = bar.Bar(widgets=widgets_main,
                       **bar_defaults)
@@ -310,6 +339,7 @@ bar_screen2 = bar.Bar(widgets=widgets_bar2,
 screens = [
     Screen(top=bar_screen1,
            wallpaper='/home/duo/repos/wallpapers/0114.jpg',
+           #wallpaper='~/.wallpapers/citadel.jpg',
            wallpaper_mode='fill',),
     Screen(top=bar_screen2,
            wallpaper='~/.wallpapers/citadel2.png',
