@@ -1,6 +1,9 @@
 import:
   - ~/.config/alacritty/colorschemes.yml
 
+env:
+  TERM: xterm-256color
+
 key_bindings:
     # (Windows, Linux, and BSD only)
   - { key: V,        mods: Control|Shift, action: Paste            }
@@ -16,15 +19,18 @@ key_bindings:
 
 font:
   normal:
-    family: Source Code Pro
+    #family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Regular
 
   bold:
-    family: Source Code Pro
+    #family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Bold
 
   italic:
-    family: Source Code Pro
+    #family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Italic
 
   size: 8.5
@@ -43,7 +49,7 @@ shell:
 
 draw_bold_text_with_bright_colors: true
 save_to_clipboard: true
-background_opacity: 0.88
+background_opacity: 0.9
 dynamic_title: true
 
 debug:
