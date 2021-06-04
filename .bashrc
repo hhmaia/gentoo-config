@@ -52,3 +52,4 @@ conda deactivate
 . /usr/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
 # <<< powerline initialize <<<
 export PATH=~/.local/bin:"$PATH"
+
