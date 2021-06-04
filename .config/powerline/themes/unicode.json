@@ -65,7 +65,7 @@
 			"before": "✉ "
 		},
 		"powerline.segments.common.env.virtualenv": {
-			"before": "ⓔ  "
+			"before": "  "
 		},
 		"powerline.segments.common.wthr.weather": {
 			"args": {
