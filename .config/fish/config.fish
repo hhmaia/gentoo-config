@@ -299,3 +299,5 @@ source /usr/lib/python3.8/site-packages/powerline/bindings/fish/powerline-setup.
 powerline-setup
 
 set fish_greeting ""
+
+source ~/.config/fish/fish_aliases.sh

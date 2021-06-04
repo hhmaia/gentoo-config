@@ -141,20 +141,6 @@ for g in groups:
             lazy.window.togroup(g.name, switch_group=True)),
     ])
 
-
-#groups = [Group(i) for i in "12345678"]
-
-#for i in groups:
-#    keys.extend([
-#        # mod1 + letter of group = switch to group
-#        Key([mod], i.name, lazy.group[i.name].toscreen()),
-#
-#        # mod1 + shift + letter of group = switch to & move focused window to group
-#        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True)),
-#        # Or, use below if you prefer not to switch to that group.
-#        # # mod1 + shift + letter of group = move focused window to group
-#        #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
-#    ])
 # <<< groups section <<<
 
 garuda_colors = {
@@ -169,10 +155,10 @@ garuda_colors = {
 garuda_colors_alt = {
     'text_highlight':   'EB3247',
     'text_normal':      'EDC29A',
-    'background':       '171615',
-    'border':           '424140',
+    'background':       '272625',
+    'border':           '626160',
     'border_inactive':  '222120',
-    'inactive':         '404040'
+    'inactive':         '606060'
 }
 
 nord_colors = {
@@ -209,7 +195,7 @@ graph_monitor_options = dict(
     frequency=0.3,
     samples=100,
     margin_x=1,
-    margin_y=1,
+    margin_y=4,
     border_width=0,
     type='line',
     mouse_callbacks={ 'Button1': lambda qtile: qtile.cmd_spawn('alacritty -e htop') },
@@ -217,7 +203,7 @@ graph_monitor_options = dict(
 
 widget_defaults = dict(
     #font='SauceCodePro Nerd Font',
-    font='Source Code Pro Regular',
+    font='Source Code Pro Bold',
     fontsize=9,
     padding=2,
     foreground=colors['text_normal'],
@@ -254,6 +240,7 @@ clock_options = dict(
 )
 
 widgets_main = [
+    widget.Sep(**separator_options),
     widget.TextBox(
                  '',
                  fontsize=18,
@@ -288,29 +275,24 @@ widgets_main = [
     widget.Prompt(prompt='  ',),
     widget.Sep(**separator_options),
     widget.WindowName(foreground=colors['text_highlight']),
-    widget.Spacer(bar.STRETCH),
     widget.CPUGraph(
             graph_color='FF9AA0',
-            #fill_color='7D2F3E',
+            align='center',
             **graph_monitor_options,
             ),
     widget.MemoryGraph(
             graph_color='FB5267',
-            #fill_color='EB3247',
             **graph_monitor_options,
             ),
     widget.NetGraph(
             graph_color='FF7753',
-            #fill_color='9C382B',
             **graph_monitor_options,
             ),
     widget.HDDBusyGraph(
             device='sdb',
             graph_color='FAD42E',
-            #fill_color='9E6B26',
             **graph_monitor_options,
             ),
-    widget.Spacer(bar.STRETCH),
     widget.Spacer(bar.STRETCH),
     widget.Cmus(foreground=widget_defaults['foreground'],
             play_color=colors['text_highlight'],
