@@ -28,7 +28,7 @@ import subprocess
 import time
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.lazy import lazy
-from libqtile import layout, bar, widget, hook
+from libqtile import layout, bar, widget, hook, qtile
 #from powerline.bindings.qtile.widget import PowerlineTextBox
 
 from typing import List  # noqa: F401
@@ -189,7 +189,7 @@ colors = garuda_colors_alt
 # >>> layouts section >>>
 layout_params = dict(
     margin=8,
-    border_focus=colors['text_highlight'], #'A73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
+    border_focus=colors['text_normal'], #'A73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal=colors['border_inactive'],
     border_width=2
 )
@@ -199,43 +199,36 @@ layouts = [
                fair=False,),
     layout.Max(),
     layout.MonadTall(**layout_params),
-    #layout.Matrix(**layout_params),
-    #layout.Columns(**layout_params),
-    #layout.Stack(num_stacks=2, **layout_params),
-    #layout.MonadWide(**layout_params),
-    #layout.RatioTile(**layout_params),
-    #layout.Tile(**layout_params),
-    #layout.TreeTab(),
-    #layout.VerticalTile(**layout_params),
-    #layout.Zoomy(**layout_params),
 ]
 # <<< layouts section <<<
 
 
 graph_monitor_options = dict(
-    line_width=2,
-    frequency=0.2,
-    start_pos='top',
-    samples=5000,
+    line_width=1,
+    #start_pos='top',
+    frequency=0.3,
+    samples=100,
     margin_x=1,
     margin_y=1,
-    border_width=1
+    border_width=0,
+    type='line',
+    mouse_callbacks={ 'Button1': lambda qtile: qtile.cmd_spawn('alacritty -e htop') },
 )
 
 widget_defaults = dict(
-    font='Source Code Pro',
+    #font='SauceCodePro Nerd Font',
+    font='Source Code Pro Regular',
     fontsize=9,
     padding=2,
     foreground=colors['text_normal'],
     background=colors['background'],
     border_color=colors['border'],
-    **graph_monitor_options
 )
 
 extension_defaults = widget_defaults.copy()
 
 separator_options = dict(
-    foreground=widget_defaults['border_color'],
+    foreground=garuda_colors_alt['border'],
     linewidth=1,
     size_percent=50,
     padding=4,
@@ -261,63 +254,80 @@ clock_options = dict(
 )
 
 widgets_main = [
-    widget.Image(filename="~/.config/qtile/gentoo.png",
-                 scale=True,
-                 margin_x=2,
-                 margin_y=5,
+    widget.TextBox(
+                 '',
+                 fontsize=18,
+                 foreground='FF9AA0',
                  mouse_callbacks={
                     'Button1': lambda qtile: qtile.cmd_spawn(rofi_cmd)
                  }
-                 ),
-    widget.Sep(**separator_options),
-    widget.Clock(**clock_options),
-    #widget.Sep(**separator_options),
-    #widget.Pomodoro(**widget_defaults,
-    #            length_pomodori=20,
-    #            length_short_break=5,
-    #            length_long_break=20),
+    ),
     widget.Sep(**separator_options),
     widget.CurrentLayout(foreground=colors['text_highlight'],),
     widget.GroupBox(**groupbox_options),
     widget.Sep(**separator_options),
-    widget.Prompt(),
+    widget.TextBox('',
+                   foreground='FF7753',
+                   fontsize=18,
+                   mouse_callbacks={
+                    'Button1': lambda qtile: qtile.cmd_spawn('firefox'),
+                   }),
+    widget.TextBox('',
+                   fontsize=18,
+                   foreground='426190',
+                   mouse_callbacks={
+                    'Button1': lambda qtile: qtile.cmd_spawn('steam'),
+                   }),
+    widget.TextBox('',
+                   fontsize=18,
+                   foreground='BFBFBF',
+                   mouse_callbacks={
+                    'Button1': lambda qtile: qtile.cmd_spawn('discord'),
+                   }),
+    widget.Sep(**separator_options),
+    widget.Prompt(prompt='  ',),
     widget.Sep(**separator_options),
     widget.WindowName(foreground=colors['text_highlight']),
+    widget.Spacer(bar.STRETCH),
+    widget.CPUGraph(
+            graph_color='FF9AA0',
+            #fill_color='7D2F3E',
+            **graph_monitor_options,
+            ),
+    widget.MemoryGraph(
+            graph_color='FB5267',
+            #fill_color='EB3247',
+            **graph_monitor_options,
+            ),
+    widget.NetGraph(
+            graph_color='FF7753',
+            #fill_color='9C382B',
+            **graph_monitor_options,
+            ),
+    widget.HDDBusyGraph(
+            device='sdb',
+            graph_color='FAD42E',
+            #fill_color='9E6B26',
+            **graph_monitor_options,
+            ),
+    widget.Spacer(bar.STRETCH),
+    widget.Spacer(bar.STRETCH),
     widget.Cmus(foreground=widget_defaults['foreground'],
             play_color=colors['text_highlight'],
             align='right',
             ),
     widget.Sep(**separator_options),
-    widget.TextBox('🔊', fontsize=11),
-    widget.Volume(),
-    widget.Sep(**separator_options),
     widget.Systray(icon_size=12),
     widget.Sep(**separator_options),
-
-    widget.CPUGraph(
-            graph_color='FF9AA0',
-            fill_color='7D2F3E',
-            ),
-    widget.MemoryGraph(
-            graph_color='FF4000',
-            fill_color='A12231',
-            ),
-    widget.NetGraph(
-            graph_color='FF7753',
-            fill_color='9C382B',
-            ),
-    widget.HDDBusyGraph(
-            device='sdb',
-            graph_color='FAD42E',
-            fill_color='9E6B26',
-            ),
+    widget.TextBox('', fontsize=18),
+    widget.Volume(),
+    widget.Sep(**separator_options),
+    widget.Clock(**clock_options),
+    widget.Sep(**separator_options),
+    #widget.BatteryIcon(),
 ]
 
 widgets_bar2 = [
-    widget.Image(filename = "~/.config/qtile/gentoo.png",
-            scale = True,
-            margin=5,
-            ),
     widget.Sep(**separator_options),
     widget.Clock(**clock_options),
     widget.Sep(**separator_options),
@@ -327,7 +337,7 @@ widgets_bar2 = [
 ]
 
 bar_defaults = dict(size=24,
-                    opacity=.99,
+                    opacity=1,
                     margin=[3, 8, 0, 8],
                     background=colors['background'])
 
@@ -338,8 +348,10 @@ bar_screen2 = bar.Bar(widgets=widgets_bar2,
 
 screens = [
     Screen(top=bar_screen1,
-           wallpaper='/home/duo/repos/wallpapers/0114.jpg',
+           #wallpaper='/home/duo/repos/wallpapers/0114.jpg',
+           #wallpaper='~/.wallpapers/potw1930a.jpg',
            #wallpaper='~/.wallpapers/citadel.jpg',
+           wallpaper='~/.wallpapers/2EKDRNc.jpg',
            wallpaper_mode='fill',),
     Screen(top=bar_screen2,
            wallpaper='~/.wallpapers/citadel2.png',
