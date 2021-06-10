@@ -155,7 +155,7 @@ garuda_colors = {
 garuda_colors_alt = {
     'text_highlight':   'EB3247',
     'text_normal':      'EDC29A',
-    'background':       '272625',
+    'background':       '1A1E21', #272625
     'border':           '626160',
     'border_inactive':  '222120',
     'inactive':         '606060'
@@ -182,6 +182,7 @@ layout_params = dict(
 
 layouts = [
     layout.Bsp(**layout_params,
+               grow_amount=5,
                fair=False,),
     layout.Max(),
     layout.MonadTall(**layout_params),
@@ -250,9 +251,6 @@ widgets_main = [
                  }
     ),
     widget.Sep(**separator_options),
-    widget.CurrentLayout(foreground=colors['text_highlight'],),
-    widget.GroupBox(**groupbox_options),
-    widget.Sep(**separator_options),
     widget.TextBox('',
                    foreground='FF7753',
                    fontsize=18,
@@ -272,12 +270,14 @@ widgets_main = [
                     'Button1': lambda qtile: qtile.cmd_spawn('discord'),
                    }),
     widget.Sep(**separator_options),
-    widget.Prompt(prompt='  ',),
+    widget.CurrentLayout(foreground=colors['text_highlight'],),
+    widget.GroupBox(**groupbox_options),
+    widget.Sep(**separator_options),
+    widget.Prompt(prompt=' ',),
     widget.Sep(**separator_options),
     widget.WindowName(foreground=colors['text_highlight']),
     widget.CPUGraph(
             graph_color='FF9AA0',
-            align='center',
             **graph_monitor_options,
             ),
     widget.MemoryGraph(
@@ -293,10 +293,14 @@ widgets_main = [
             graph_color='FAD42E',
             **graph_monitor_options,
             ),
+    widget.HDDBusyGraph(
+            device='sda',
+            graph_color='FAD42E',
+            **graph_monitor_options,
+            ),
     widget.Spacer(bar.STRETCH),
     widget.Cmus(foreground=widget_defaults['foreground'],
-            play_color=colors['text_highlight'],
-            align='right',
+                play_color=colors['text_highlight'],
             ),
     widget.Sep(**separator_options),
     widget.Systray(icon_size=12),
@@ -311,11 +315,12 @@ widgets_main = [
 
 widgets_bar2 = [
     widget.Sep(**separator_options),
+    widget.WindowName(foreground=colors['text_highlight']),
+    widget.Sep(**separator_options),
     widget.Clock(**clock_options),
     widget.Sep(**separator_options),
     widget.GroupBox(**groupbox_options),
     widget.Sep(**separator_options),
-    widget.WindowName(foreground=colors['text_highlight']),
 ]
 
 bar_defaults = dict(size=24,
@@ -336,7 +341,8 @@ screens = [
            wallpaper='~/.wallpapers/2EKDRNc.jpg',
            wallpaper_mode='fill',),
     Screen(top=bar_screen2,
-           wallpaper='~/.wallpapers/citadel2.png',
+           #wallpaper='~/.wallpapers/citadel2.png',
+           wallpaper='~/.wallpapers/2EKDRNc.jpg',
            wallpaper_mode='fill',),
 ]
 
