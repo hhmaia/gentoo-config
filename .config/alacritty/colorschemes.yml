@@ -84,7 +84,8 @@ schemes:
 
   garuda_alt: &garuda_alt
     primary:
-      background: '#171615'
+#      background: '#171615'
+      background: '#1A1E21'
       foreground: '#EDC29A'
     cursor:
       text:       '#EB3247'
@@ -107,6 +108,30 @@ schemes:
       magenta:    '#FFC75B'
       cyan:       '#FFF44E'
       white:      '#FDD2BA'
+
+
+  megaman: &megaman
+    primary:
+      background: '#2A3344'
+      foreground: '#F6D6AD'
+    normal:
+      black:      '#181818'
+      red:        '#E82B2F'
+      green:      '#00D868'
+      yellow:     '#F8E070'
+      blue:       '#0A3BCD'
+      magenta:    '#0080F8'
+      cyan:       '#78D8F0'
+      white:      '#E0E0E0'
+    bright:
+      black:      '#A8A8A8'
+      red:        '#FF3F4B'
+      green:      '#00FF88'
+      yellow:     '#FFED7D'
+      blue:       '#0A6BFD'
+      magenta:    '#0080F8'
+      cyan:       '#88F8FF'
+      white:      '#FFFFFF'
 
 
   nord: &nord
@@ -157,5 +182,6 @@ schemes:
       magenta: '#8c738c'
       cyan: '#6d96a5'
       white: '#aeb3bb'
+
 
 colors: *garuda_alt

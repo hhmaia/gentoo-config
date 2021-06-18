@@ -92,3 +92,5 @@ colorscheme delek
 
 " removes trailing whitespaces
 autocmd BufWritePre * %s/\s\+$//e
+
+source ~/.vim/vimrc_coc

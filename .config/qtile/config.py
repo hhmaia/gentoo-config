@@ -39,9 +39,13 @@ default_term = "alacritty"
 
 # >>> screenshot related >>>
 ss_dir = '/home/gentoo/henrique/Screenshots/'
+ss_doc_dir = '/home/gentoo/henrique/Screenshots/doc/'
 ss_pattern = "$(date +%Y%m%d%H%M%S).png'"
+
 ss_cmd = "sh -c 'import -window root " + ss_dir + ss_pattern
 ss_cmd_mod = "sh -c 'import " + ss_dir + ss_pattern
+ss_doc_cmd = "sh -c 'import -window root " + ss_doc_dir+ ss_pattern
+ss_doc_cmd_mod = "sh -c 'import " + ss_doc_dir + ss_pattern
 # <<< screenshot related <<<
 
 rofi_cmd = "rofi -show drun \
@@ -110,6 +114,8 @@ keys = [
     Key([mod], "p", lazy.spawn('xrandr --output eDP1 --off'), lazy.restart()),
     Key([], "Print", lazy.spawn(ss_cmd)),
     Key([mod], "Print", lazy.spawn(ss_cmd_mod)),
+    Key(['shift'], "Print", lazy.spawn(ss_doc_cmd)),
+    Key([mod, 'shift'], "Print", lazy.spawn(ss_doc_cmd_mod)),
 
     # Media keys setup
     Key([], "XF86AudioPlay", lazy.spawn("cmus-remote -u")),
