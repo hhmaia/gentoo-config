@@ -32,24 +32,13 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/shared/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/shared/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/shared/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/shared/miniconda3/bin:$PATH"
-    fi
+## >>> powerline initialize >>>
+if [ ! -z ${COLORTERM} ]; then
+    powerline-daemon -q
+    POWERLINE_BASH_CONTINUATION=1
+    POWERLINE_BASH_SELECT=1
+    . /usr/lib/python3.9/site-packages/powerline/bindings/bash/powerline.sh
 fi
-unset __conda_setup
-conda deactivate
-# <<< conda initialize <<<
-
-# >>> powerline initialize >>>
-. /usr/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
 # <<< powerline initialize <<<
 export PATH=~/.local/bin:"$PATH"
 
