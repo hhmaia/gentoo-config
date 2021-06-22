@@ -180,8 +180,8 @@ colors = garuda_colors_alt
 
 # >>> layouts section >>>
 layout_params = dict(
-    margin=8,
-    border_focus=colors['text_normal'], #'A73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
+    margin=5,
+    border_focus='#FF7753', #colors['text_normal'], #'A73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal=colors['border_inactive'],
     border_width=2
 )
