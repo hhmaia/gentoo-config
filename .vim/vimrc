@@ -50,7 +50,6 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
-" Jedi instalation
 execute pathogen#infect()
 
 let g:airline_powerline_fonts = 1
@@ -59,6 +58,7 @@ let g:airline_theme = 'raven'
 set number
 set nolist
 set listchars=eol:$,space:.,tab:▒░,trail:▓,nbsp:░
+" set list
 
 set tabstop=4
 set shiftwidth=4
@@ -70,10 +70,7 @@ nmap <S-F9> :AirlineToggle<CR>
 nmap <F2> :tabe<SPACE>
 nmap <F3> :noh<CR>
 nmap <S-F5> :last<CR>
-
-let g:jedi#usages_command = "<F4>"
-let g:jedi#goto_assignments_command = "<F5>"
-let g:jedi#rename_command = "<F6>"
+nmap <S-F10> :set cursorcolumn!<CR>
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -82,15 +79,15 @@ syntax on
 
 set colorcolumn=80
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 autocmd ColorScheme *
-    \ highlight cursorline term=bold cterm=bold ctermbg=236 |
-    \ highlight cursorcolumn term=bold cterm=bold ctermbg=236 |
-    \ highlight colorcolumn ctermbg=236
+     \ highlight cursorline term=bold cterm=bold ctermbg=238 |
+     \ highlight cursorcolumn term=bold cterm=bold ctermbg=238 |
+     \ highlight colorcolumn ctermbg=238
 
 colorscheme delek
 
-" removes trailing whitespaces
-autocmd BufWritePre * %s/\s\+$//e
+" " removes trailing whitespaces
+" " autocmd BufWritePre * %s/\s\+$//e
 
 source ~/.vim/vimrc_coc
