@@ -248,34 +248,34 @@ clock_options = dict(
 
 widgets_main = [
     widget.Sep(**separator_options),
-    widget.TextBox(
-                 '',
-                 fontsize=18,
-                 foreground='FF9AA0',
-                 mouse_callbacks={
-                    'Button1': lambda qtile: qtile.cmd_spawn(rofi_cmd)
-                 }
-    ),
-    widget.Sep(**separator_options),
-    widget.TextBox('',
-                   foreground='FF7753',
-                   fontsize=18,
-                   mouse_callbacks={
-                    'Button1': lambda qtile: qtile.cmd_spawn('firefox'),
-                   }),
-    widget.TextBox('',
-                   fontsize=18,
-                   foreground='426190',
-                   mouse_callbacks={
-                    'Button1': lambda qtile: qtile.cmd_spawn('steam'),
-                   }),
-    widget.TextBox('',
-                   fontsize=18,
-                   foreground='BFBFBF',
-                   mouse_callbacks={
-                    'Button1': lambda qtile: qtile.cmd_spawn('discord'),
-                   }),
-    widget.Sep(**separator_options),
+    #widget.TextBox(
+    #             '',
+    #             fontsize=18,
+    #             foreground='FF9AA0',
+    #             mouse_callbacks={
+    #                'Button1': lambda qtile: qtile.cmd_spawn(rofi_cmd)
+    #             }
+    #),
+    #widget.Sep(**separator_options),
+    #widget.TextBox('',
+    #               foreground='FF7753',
+    #               fontsize=18,
+    #               mouse_callbacks={
+    #                'Button1': lambda qtile: qtile.cmd_spawn('firefox'),
+    #               }),
+    #widget.TextBox('',
+    #               fontsize=18,
+    #               foreground='426190',
+    #               mouse_callbacks={
+    #                'Button1': lambda qtile: qtile.cmd_spawn('steam'),
+    #               }),
+    #widget.TextBox('',
+    #               fontsize=18,
+    #               foreground='BFBFBF',
+    #               mouse_callbacks={
+    #                'Button1': lambda qtile: qtile.cmd_spawn('discord'),
+    #               }),
+    #widget.Sep(**separator_options),
     widget.CurrentLayout(foreground=colors['text_highlight'],),
     widget.GroupBox(**groupbox_options),
     widget.Sep(**separator_options),
@@ -283,29 +283,34 @@ widgets_main = [
     widget.Sep(**separator_options),
     widget.WindowName(foreground=colors['text_highlight']),
     widget.CPUGraph(
-            graph_color='FF9AA0',
+            graph_color='EB3247',
+            #graph_color='FF9AA0',
             **graph_monitor_options,
             ),
     widget.MemoryGraph(
-            graph_color='FB5267',
+            graph_color='EB3247',
+            #graph_color='FB5267',
             **graph_monitor_options,
             ),
     widget.NetGraph(
-            graph_color='FF7753',
+            graph_color='EB3247',
+            #graph_color='FF7753',
             **graph_monitor_options,
             ),
     widget.HDDBusyGraph(
+            graph_color='EB3247',
             device='sdb',
-            graph_color='FAD42E',
+            #graph_color='FAD42E',
             **graph_monitor_options,
             ),
     widget.HDDBusyGraph(
+            graph_color='EB3247',
             device='sda',
-            graph_color='FAD42E',
+            #graph_color='FAD42E',
             **graph_monitor_options,
             ),
     widget.Spacer(bar.STRETCH),
-    widget.Cmus(foreground=widget_defaults['foreground'],
+    widget.Cmus(foreground=colors['text_normal'],
                 play_color=colors['text_highlight'],
             ),
     widget.Sep(**separator_options),
@@ -341,10 +346,12 @@ bar_screen2 = bar.Bar(widgets=widgets_bar2,
 
 screens = [
     Screen(top=bar_screen1,
+            wallpaper='~/.wallpapers/planets2.jpg',
            #wallpaper='/home/duo/repos/wallpapers/0114.jpg',
            #wallpaper='~/.wallpapers/potw1930a.jpg',
            #wallpaper='~/.wallpapers/citadel.jpg',
-           wallpaper='~/.wallpapers/2EKDRNc.jpg',
+           #wallpaper='~/.wallpapers/2EKDRNc.jpg',
+           #wallpaper='~/.wallpapers/ey1i5yi1h4571.jpg',
            wallpaper_mode='fill',),
     Screen(top=bar_screen2,
            #wallpaper='~/.wallpapers/citadel2.png',

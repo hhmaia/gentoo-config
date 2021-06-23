@@ -33,7 +33,7 @@ font:
     family: SauceCodePro Nerd Font
     style: Italic
 
-  size: 10 
+  size: 9 
 
 
 scrolling:
@@ -49,7 +49,7 @@ shell:
 
 draw_bold_text_with_bright_colors: true
 save_to_clipboard: true
-background_opacity: 0.90
+background_opacity: 0.1
 dynamic_title: true
 
 debug:
