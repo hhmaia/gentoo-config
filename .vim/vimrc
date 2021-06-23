@@ -86,8 +86,13 @@ autocmd ColorScheme *
      \ highlight colorcolumn ctermbg=238
 
 colorscheme delek
-
-" " removes trailing whitespaces
-" " autocmd BufWritePre * %s/\s\+$//e
+" colorscheme nord
+" colorscheme monokai 
+" if $COLORTERM != ""
+"     hi Normal guibg=NONE ctermbg=NONE
+"     set termguicolors
+" endif
+" removes trailing whitespaces
+" autocmd BufWritePre * %s/\s\+$//e
 
 source ~/.vim/vimrc_coc
