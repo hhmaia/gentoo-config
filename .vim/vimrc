@@ -77,6 +77,15 @@ set omnifunc=syntaxcomplete#Complete
 filetype plugin on
 syntax on
 
+" colorscheme delek
+" colorscheme nord
+" colorscheme monokai
+colorscheme dracula
+if $COLORTERM != ""
+    hi Normal guibg=NONE ctermbg=NONE
+    set termguicolors
+endif
+
 set colorcolumn=80
 set cursorline
 " set cursorcolumn
@@ -85,13 +94,6 @@ autocmd ColorScheme *
      \ highlight cursorcolumn term=bold cterm=bold ctermbg=238 |
      \ highlight colorcolumn ctermbg=238
 
-colorscheme delek
-" colorscheme nord
-" colorscheme monokai 
-" if $COLORTERM != ""
-"     hi Normal guibg=NONE ctermbg=NONE
-"     set termguicolors
-" endif
 " removes trailing whitespaces
 " autocmd BufWritePre * %s/\s\+$//e
 

@@ -159,7 +159,7 @@ garuda_colors = {
 }
 
 garuda_colors_alt = {
-    'text_highlight':   'EB3247',
+    'text_highlight':   'F1FA8C', #'EB3247',
     'text_normal':      'EDC29A',
     'background':       '1A1E21', #272625
     'border':           '626160',
@@ -175,6 +175,10 @@ nord_colors = {
     'border_inactive':  '222120',
     'inactive':         '606060'
 }
+
+#dracula_colors = {
+#    'background':       '
+#}
 
 colors = garuda_colors_alt
 
@@ -213,7 +217,7 @@ widget_defaults = dict(
     font='Source Code Pro Bold',
     fontsize=9,
     padding=2,
-    foreground=colors['text_normal'],
+    foreground=colors['text_highlight'],
     background=colors['background'],
     border_color=colors['border'],
 )
@@ -248,14 +252,15 @@ clock_options = dict(
 
 widgets_main = [
     widget.Sep(**separator_options),
-    #widget.TextBox(
-    #             '',
-    #             fontsize=18,
-    #             foreground='FF9AA0',
-    #             mouse_callbacks={
-    #                'Button1': lambda qtile: qtile.cmd_spawn(rofi_cmd)
-    #             }
-    #),
+    widget.TextBox(
+                 '',
+                 fontsize=18,
+                 foreground=colors['text_highlight'],
+                 mouse_callbacks={
+                    'Button1': lambda qtile: qtile.cmd_spawn(rofi_cmd)
+                 }
+    ),
+    widget.Sep(**separator_options),
     #widget.Sep(**separator_options),
     #widget.TextBox('',
     #               foreground='FF7753',
@@ -283,30 +288,25 @@ widgets_main = [
     widget.Sep(**separator_options),
     widget.WindowName(foreground=colors['text_highlight']),
     widget.CPUGraph(
-            graph_color='EB3247',
-            #graph_color='FF9AA0',
+            graph_color=colors['text_highlight'],
             **graph_monitor_options,
             ),
     widget.MemoryGraph(
-            graph_color='EB3247',
-            #graph_color='FB5267',
+            graph_color=colors['text_highlight'],
             **graph_monitor_options,
             ),
     widget.NetGraph(
-            graph_color='EB3247',
-            #graph_color='FF7753',
+            graph_color=colors['text_highlight'],
             **graph_monitor_options,
             ),
     widget.HDDBusyGraph(
-            graph_color='EB3247',
+            graph_color=colors['text_highlight'],
             device='sdb',
-            #graph_color='FAD42E',
             **graph_monitor_options,
             ),
     widget.HDDBusyGraph(
-            graph_color='EB3247',
+            graph_color=colors['text_highlight'],
             device='sda',
-            #graph_color='FAD42E',
             **graph_monitor_options,
             ),
     widget.Spacer(bar.STRETCH),
