@@ -1,0 +1,2 @@
+changeps1: true 
+env_prompt: \n濾\[\033[38;5;14m {default_env} \033[0m\]

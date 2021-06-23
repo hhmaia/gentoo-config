@@ -32,12 +32,22 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+. ~/.local/bin/git-prompt.sh
+
 ## >>> powerline initialize >>>
 if [ ! -z ${COLORTERM} ]; then
-    powerline-daemon -q
-    POWERLINE_BASH_CONTINUATION=1
-    POWERLINE_BASH_SELECT=1
-    . /usr/lib/python3.9/site-packages/powerline/bindings/bash/powerline.sh
+    PS1="\[\033[38;5;15;1m濾\033[0m\]"
+    PS1="${PS1}\[\033[38;5;13;1m\$(__git_ps1 ' %s')\033[0m\]"
+    PS1="${PS1}\[\033[38;5;15;1m 濾\033[0m\]"
+    PS1="${PS1}\[\033[38;5;12;1m\w\033[0m\] "
+    #PS1="${PS1}\[\033[38;5;15;1m\033[0m\]"
+    #PS1="${PS1}\[\033[38;5;11;1m\033[0m\] "
+    PS1="${PS1}\[\033[38;5;11;1m 濾\033[0m\]"
+    PS2="\[\033[38;5;11;1m濾\033[0m\]"
+#    powerline-daemon -q
+#    POWERLINE_BASH_CONTINUATION=1
+#    POWERLINE_BASH_SELECT=1
+#    . /usr/lib/python3.9/site-packages/powerline/bindings/bash/powerline.sh
 fi
 # <<< powerline initialize <<<
 export PATH=~/.local/bin:"$PATH"
