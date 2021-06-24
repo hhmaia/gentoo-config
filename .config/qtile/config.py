@@ -32,7 +32,6 @@ from libqtile import layout, bar, widget, hook, qtile
 #from powerline.bindings.qtile.widget import PowerlineTextBox
 
 from typing import List  # noqa: F401
-#from libqtile import qtile
 import commands
 from keybindings import mod, keys, default_term
 from colorschemes import dracula_colors as colors
@@ -56,7 +55,7 @@ for g in groups:
 # >>> layouts section >>>
 layout_params = dict(
     margin=0,
-    border_focus=colors['border'], #'#FF7753', #'A73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
+    border_focus=colors['border'],
     border_normal=colors['border_inactive'],
     border_width=1
 )
@@ -70,6 +69,17 @@ layouts = [
 ]
 # <<< layouts section <<<
 
+widget_defaults = dict(
+    #font='SauceCodePro Nerd Font',
+    font='Source Code Pro Bold',
+    fontsize=9,
+    padding=2,
+    foreground=colors['highlight'],
+    background=colors['background'],
+    border_color=colors['border'],
+)
+
+extension_defaults = widget_defaults.copy()
 
 graph_monitor_options = dict(
     graph_color=colors['highlight'],
@@ -84,18 +94,6 @@ graph_monitor_options = dict(
     mouse_callbacks={ 'Button1': lambda qtile: qtile.cmd_spawn('alacritty -e htop') },
 )
 
-widget_defaults = dict(
-    #font='SauceCodePro Nerd Font',
-    font='Source Code Pro Bold',
-    fontsize=9,
-    padding=2,
-    foreground=colors['highlight'],
-    background=colors['background'],
-    border_color=colors['border'],
-)
-
-extension_defaults = widget_defaults.copy()
-
 separator_options = dict(
     foreground=colors['separator'],
     linewidth=1,
@@ -104,11 +102,11 @@ separator_options = dict(
 )
 
 groupbox_options = dict(
-    active=colors['group_active'],
+    active=colors['highlight'],
     font='Symbola',
     fontsize=10,
-    block_highlight_text_color=colors['highlight'],
-    this_current_screen_border=colors['highlight'],
+    block_highlight_text_color=colors['group_active'],
+    this_current_screen_border=colors['group_active'],
     inactive=colors['group_inactive'],
     borderwidth=1,
     disable_drag=True
@@ -136,7 +134,7 @@ widgets_main = [
     widget.CurrentLayout(foreground=colors['highlight'],),
     widget.GroupBox(**groupbox_options),
     widget.Sep(**separator_options),
-    widget.Prompt(prompt=' ',),
+    widget.Prompt(prompt='☉ ',),
     widget.Sep(**separator_options),
     widget.WindowName(foreground=colors['highlight']),
     widget.CPUGraph(**graph_monitor_options),
@@ -181,17 +179,10 @@ bar_screen2 = bar.Bar(widgets=widgets_bar2,
 
 screens = [
     Screen(top=bar_screen1,
-            wallpaper='~/.wallpapers/planets2.jpg',
-           #wallpaper='/home/duo/repos/wallpapers/0114.jpg',
-           #wallpaper='~/.wallpapers/potw1930a.jpg',
-           #wallpaper='~/.wallpapers/citadel.jpg',
-           #wallpaper='~/.wallpapers/2EKDRNc.jpg',
-           #wallpaper='~/.wallpapers/ey1i5yi1h4571.jpg',
+           wallpaper='~/.wallpapers/planets2.jpg',
            wallpaper_mode='fill',),
     Screen(top=bar_screen2,
            wallpaper='~/.wallpapers/planets2.jpg',
-           #wallpaper='~/.wallpapers/citadel2.png',
-           #wallpaper='~/.wallpapers/2EKDRNc.jpg',
            wallpaper_mode='fill',),
 ]
 

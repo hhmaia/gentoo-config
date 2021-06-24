@@ -30,3 +30,6 @@ alias lsa='lsd -lahF --group-dirs first'
 alias tree='tree -C'
 
 alias find_modules='find /lib/modules/$(uname -r)/ -type f -name "*.ko*"'
+
+alias nfetch='neofetch --disable WM --disable GPU --disable host --disable shell --disable CPU --disable uptime --disable icons --ascii_distro gentoo_small --ascii_bold on --cpu_brand off --distro_shorthand tiny --bold on --disable memory'
+
