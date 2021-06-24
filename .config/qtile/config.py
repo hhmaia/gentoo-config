@@ -161,7 +161,7 @@ garuda_colors = {
 garuda_colors_alt = {
     'text_highlight':   'F1FA8C', #'EB3247',
     'text_normal':      'EDC29A',
-    'background':       '1A1E21', #272625
+    'background':       '1E1F29', #'1A1E21', #272625
     'border':           '626160',
     'border_inactive':  '222120',
     'inactive':         '606060'
