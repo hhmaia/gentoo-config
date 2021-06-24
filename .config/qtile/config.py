@@ -33,104 +33,9 @@ from libqtile import layout, bar, widget, hook, qtile
 
 from typing import List  # noqa: F401
 #from libqtile import qtile
-
-mod = "mod4"
-default_term = "alacritty"
-
-# >>> screenshot related >>>
-ss_dir = '/home/gentoo/henrique/Screenshots/'
-ss_doc_dir = '/home/gentoo/henrique/Screenshots/doc/'
-ss_pattern = "$(date +%Y%m%d%H%M%S).png'"
-
-ss_cmd = "sh -c 'import -window root " + ss_dir + ss_pattern
-ss_cmd_mod = "sh -c 'import " + ss_dir + ss_pattern
-ss_doc_cmd = "sh -c 'import -window root " + ss_doc_dir+ ss_pattern
-ss_doc_cmd_mod = "sh -c 'import " + ss_doc_dir + ss_pattern
-# <<< screenshot related <<<
-
-rofi_cmd = "rofi -show drun \
-                -width 20 \
-                -show-icons \
-                -theme /usr/share/rofi/themes/arthur.rasi \
-                -terminal " + default_term
-
-# >>> keys section >>>
-keys = [
-    # Switch between windows in current stack pane
-    Key([mod], "j", lazy.layout.down()),
-    Key([mod], "k", lazy.layout.up()),
-    Key([mod], "h", lazy.layout.left()),
-    Key([mod], "l", lazy.layout.right()),
-
-    # Move windows up or down in current stack
-    Key([mod, "control"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "control"], "k", lazy.layout.shuffle_up()),
-    Key([mod, "control"], "h", lazy.layout.shuffle_left()),
-    Key([mod, "control"], "l", lazy.layout.shuffle_right()),
-
-    Key([mod, "mod1"], "k", lazy.layout.grow()),
-    Key([mod, "mod1"], "j", lazy.layout.shrink()),
-    Key([mod, "mod1"], "h", lazy.layout.normalize()),
-    Key([mod, "mod1"], "l", lazy.layout.maximize()),
-
-    Key([mod, "shift"], "k", lazy.layout.grow_up()),
-    Key([mod, "shift"], "j", lazy.layout.grow_down()),
-    Key([mod, "shift"], "h", lazy.layout.grow_left()),
-    Key([mod, "shift"], "l", lazy.layout.grow_right()),
-
-    Key([mod, "mod1", "control"], "k", lazy.layout.flip_up()),
-    Key([mod, "mod1", "control"], "j", lazy.layout.flip_down()),
-    Key([mod, "mod1", "control"], "h", lazy.layout.flip_left()),
-    Key([mod, "mod1", "control"], "l", lazy.layout.flip_right()),
-    Key([mod, "shift"], 'f', lazy.layout.flip()),
-
-    Key([mod, "shift"], "BackSpace", lazy.layout.reset()),
-    Key([mod], "equal", lazy.layout.increase_ratio()),
-    Key([mod], "minus", lazy.layout.decrease_ratio()),
-    # Switch window focus to other pane(s) of stack
-    Key([mod], "space", lazy.layout.next()),
-
-    # Swap panes of split stack
-    Key([mod, "shift"], "space", lazy.layout.rotate()),
-
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn(default_term)),
-    Key([mod], 'f', lazy.window.toggle_floating()),
-    Key([mod], 'F11', lazy.window.toggle_fullscreen()),
-
-    # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout()),
-    Key([mod, 'shift'], "Tab", lazy.prev_layout()),
-    Key([mod, 'control'], "w", lazy.window.kill()),
-
-    Key([mod, "control"], "r", lazy.restart()),
-    Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod], "r", lazy.spawncmd()),
-    Key([mod, 'shift'], "r", lazy.spawn(rofi_cmd)),
-    Key([mod], "p", lazy.spawn('xrandr --output eDP1 --off'), lazy.restart()),
-    Key([], "Print", lazy.spawn(ss_cmd)),
-    Key([mod], "Print", lazy.spawn(ss_cmd_mod)),
-    Key(['shift'], "Print", lazy.spawn(ss_doc_cmd)),
-    Key([mod, 'shift'], "Print", lazy.spawn(ss_doc_cmd_mod)),
-
-    # Media keys setup
-    Key([], "XF86AudioPlay", lazy.spawn("cmus-remote -u")),
-    Key([], "XF86AudioNext", lazy.spawn("cmus-remote -n")),
-    Key([mod], "XF86AudioNext", lazy.spawn("cmus-remote --seek +10s")),
-    Key([mod], "XF86AudioPrev", lazy.spawn("cmus-remote --seek -10s")),
-    Key([], "XF86AudioPrev", lazy.spawn("cmus-remote -r")),
-    Key([], "XF86AudioStop", lazy.spawn("cmus-remote -s")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +2%")),
-    Key([mod], "XF86AudioRaiseVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +5%")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -2%")),
-    Key([mod], "XF86AudioLowerVolume", lazy.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -5%")),
-    Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute @DEFAULT_SINK@ toggle")),
-]
-# <<< keys section <<<
+import commands
+from keybindings import mod, keys, default_term
+from colorschemes import dracula_colors as colors
 
 
 # >>> groups section >>>
@@ -146,46 +51,12 @@ for g in groups:
         Key([mod, 'shift'], str(g_symbols.index(g.name) + 1),
             lazy.window.togroup(g.name, switch_group=True)),
     ])
-
 # <<< groups section <<<
-
-garuda_colors = {
-    'text_highlight':   'A73F32',
-    'text_normal':      'EDC29A',
-    'background':       '171615',
-    'border':           '424140',
-    'border_inactive':  '222120',
-    'inactive':         '404040'
-}
-
-garuda_colors_alt = {
-    'text_highlight':   'F1FA8C', #'EB3247',
-    'text_normal':      'EDC29A',
-    'background':       '1E1F29', #'1A1E21', #272625
-    'border':           '626160',
-    'border_inactive':  '222120',
-    'inactive':         '606060'
-}
-
-nord_colors = {
-    'background':       '2E3440',
-    'border':           '626160',
-    'text_normal':      'D8DEE9',
-    'text_highlight':   '81A1C1',
-    'border_inactive':  '222120',
-    'inactive':         '606060'
-}
-
-#dracula_colors = {
-#    'background':       '
-#}
-
-colors = garuda_colors_alt
 
 # >>> layouts section >>>
 layout_params = dict(
     margin=0,
-    border_focus=colors['text_normal'], #'#FF7753', #'A73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
+    border_focus=colors['border'], #'#FF7753', #'A73F32', # 'DB5247', #'A33A4E', #'A73F32', #A0ffff',
     border_normal=colors['border_inactive'],
     border_width=1
 )
@@ -201,6 +72,7 @@ layouts = [
 
 
 graph_monitor_options = dict(
+    graph_color=colors['highlight'],
     line_width=1,
     #start_pos='top',
     frequency=0.3,
@@ -217,7 +89,7 @@ widget_defaults = dict(
     font='Source Code Pro Bold',
     fontsize=9,
     padding=2,
-    foreground=colors['text_highlight'],
+    foreground=colors['highlight'],
     background=colors['background'],
     border_color=colors['border'],
 )
@@ -225,19 +97,19 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 separator_options = dict(
-    foreground=garuda_colors_alt['border'],
+    foreground=colors['separator'],
     linewidth=1,
     size_percent=50,
     padding=4,
 )
 
 groupbox_options = dict(
-    active=colors['text_normal'],
+    active=colors['group_active'],
     font='Symbola',
     fontsize=10,
-    block_highlight_text_color=colors['text_highlight'],
-    this_current_screen_border=colors['text_highlight'],
-    inactive=colors['inactive'],
+    block_highlight_text_color=colors['highlight'],
+    this_current_screen_border=colors['highlight'],
+    inactive=colors['group_inactive'],
     borderwidth=1,
     disable_drag=True
 )
@@ -255,68 +127,31 @@ widgets_main = [
     widget.TextBox(
                  '',
                  fontsize=18,
-                 foreground=colors['text_highlight'],
+                 foreground=colors['highlight'],
                  mouse_callbacks={
-                    'Button1': lambda qtile: qtile.cmd_spawn(rofi_cmd)
+                    'Button1': lambda qtile: qtile.cmd_spawn(commands.rofi)
                  }
     ),
     widget.Sep(**separator_options),
-    #widget.Sep(**separator_options),
-    #widget.TextBox('',
-    #               foreground='FF7753',
-    #               fontsize=18,
-    #               mouse_callbacks={
-    #                'Button1': lambda qtile: qtile.cmd_spawn('firefox'),
-    #               }),
-    #widget.TextBox('',
-    #               fontsize=18,
-    #               foreground='426190',
-    #               mouse_callbacks={
-    #                'Button1': lambda qtile: qtile.cmd_spawn('steam'),
-    #               }),
-    #widget.TextBox('',
-    #               fontsize=18,
-    #               foreground='BFBFBF',
-    #               mouse_callbacks={
-    #                'Button1': lambda qtile: qtile.cmd_spawn('discord'),
-    #               }),
-    #widget.Sep(**separator_options),
-    widget.CurrentLayout(foreground=colors['text_highlight'],),
+    widget.CurrentLayout(foreground=colors['highlight'],),
     widget.GroupBox(**groupbox_options),
     widget.Sep(**separator_options),
     widget.Prompt(prompt=' ',),
     widget.Sep(**separator_options),
-    widget.WindowName(foreground=colors['text_highlight']),
-    widget.CPUGraph(
-            graph_color=colors['text_highlight'],
-            **graph_monitor_options,
-            ),
-    widget.MemoryGraph(
-            graph_color=colors['text_highlight'],
-            **graph_monitor_options,
-            ),
-    widget.NetGraph(
-            graph_color=colors['text_highlight'],
-            **graph_monitor_options,
-            ),
-    widget.HDDBusyGraph(
-            graph_color=colors['text_highlight'],
-            device='sdb',
-            **graph_monitor_options,
-            ),
-    widget.HDDBusyGraph(
-            graph_color=colors['text_highlight'],
-            device='sda',
-            **graph_monitor_options,
-            ),
+    widget.WindowName(foreground=colors['highlight']),
+    widget.CPUGraph(**graph_monitor_options),
+    widget.MemoryGraph(**graph_monitor_options),
+    widget.NetGraph( **graph_monitor_options),
+    widget.HDDBusyGraph(device='sdb', **graph_monitor_options),
+    widget.HDDBusyGraph(device='sda', **graph_monitor_options),
     widget.Spacer(bar.STRETCH),
     widget.Cmus(foreground=colors['text_normal'],
-                play_color=colors['text_highlight'],
+                play_color=colors['highlight'],
             ),
     widget.Sep(**separator_options),
     widget.Systray(icon_size=12),
     widget.Sep(**separator_options),
-    widget.TextBox('', fontsize=18),
+    widget.TextBox('', fontsize=18),
     widget.Volume(),
     widget.Sep(**separator_options),
     widget.Clock(**clock_options),
@@ -326,7 +161,7 @@ widgets_main = [
 
 widgets_bar2 = [
     widget.Sep(**separator_options),
-    widget.WindowName(foreground=colors['text_highlight']),
+    widget.WindowName(foreground=colors['highlight']),
     widget.Sep(**separator_options),
     widget.Clock(**clock_options),
     widget.Sep(**separator_options),
@@ -354,8 +189,9 @@ screens = [
            #wallpaper='~/.wallpapers/ey1i5yi1h4571.jpg',
            wallpaper_mode='fill',),
     Screen(top=bar_screen2,
+           wallpaper='~/.wallpapers/planets2.jpg',
            #wallpaper='~/.wallpapers/citadel2.png',
-           wallpaper='~/.wallpapers/2EKDRNc.jpg',
+           #wallpaper='~/.wallpapers/2EKDRNc.jpg',
            wallpaper_mode='fill',),
 ]
 
@@ -402,7 +238,7 @@ focus_on_window_activation = "smart"
 
 @hook.subscribe.startup_once
 def autostart():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    home = os.path.expanduser('~/.config/qtile/scripts/autostart.sh')
     subprocess.call([home])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
