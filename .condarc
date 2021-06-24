@@ -1,2 +1,2 @@
 changeps1: true 
-env_prompt: \[\033[38;5;15m\] {default_env}\[\033[0m\]
+env_prompt: \[\e[38;5;15m\] {default_env}\[\e[0m\]

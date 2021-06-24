@@ -17,8 +17,8 @@ fi
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -34,28 +34,20 @@ fi
 
 . /usr/share/git/git-prompt.sh
 
-## >>> powerline initialize >>>
-# 濾
+## >>> prompt >>>
 if [ ! -z ${COLORTERM} ]; then
-    #PS1="\[\033[38;5;15;1m\]\[\033[0m\]"
-    #PS1="${PS1}\[\033[38;5;15;1m\]\[\033[0m\]"
-
+    # 濾
     PS1=''
-    PS1+="\[\033[38;5;7m\]\$(__git_ps1 ' %s')\[\033[0m\]"
-    if [ "${SSH_CONNECTION}" ]; then
-        PS1+="\[\033[38;5;4m\]\h\[\033[0m\]"
+    PS1+="\[\e[38;5;7m\]\$(__git_ps1 '%s')\[\e[0m\]"
+    if [ -v SSH_CONNECTION ]; then
+        PS1+="\[\e[38;5;4m\] \h\[\e[0m\]"
     fi
-    #PS1+="\[\033[38;5;41;1m\]\w\[\033[0m\]"
-    PS1+="\[\033[38;5;1;1m\]\w\[\033[0m\]"
-    PS1+='`if [ -n "$(jobs -p)" ]; then echo "\[\033[38;5;2;1m\]\j\[\033[0m\]"; fi`'
-    PS1+="\[\033[38;5;3;1m\] ☉ \[\033[0m\]"
+    PS1+="\[\e[38;5;1;1m\]\w\[\e[0m\]"
+    PS1+='`if [ -n "$(jobs -p)" ]; then echo "\[\e[38;5;2;1m\]\j\[\e[0m\]"; fi`'
+    PS1+="\[\e[38;5;3m\] ☉ \[\e[0m\]"
 
-    PS2="\[\033[38;5;11;1m\]濾\[\033[0m\]"
-#    powerline-daemon -q
-#    POWERLINE_BASH_CONTINUATION=1
-#    POWERLINE_BASH_SELECT=1
-#    . /usr/lib/python3.9/site-packages/powerline/bindings/bash/powerline.sh
+    PS2="\[\e[38;5;11;1m\]濾\[\e[0m\]"
 fi
-# <<< powerline initialize <<<
+# <<< prompt <<<
 export PATH=~/.local/bin:"$PATH"
 
