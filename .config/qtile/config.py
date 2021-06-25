@@ -179,7 +179,7 @@ bar_screen2 = bar.Bar(widgets=widgets_bar2,
 
 screens = [
     Screen(top=bar_screen1,
-           wallpaper='~/.wallpapers/planets2.jpg',
+           wallpaper='~/wallpapers/planets2.jpg',
            wallpaper_mode='fill',),
     Screen(top=bar_screen2,
            wallpaper='~/.wallpapers/planets2.jpg',
