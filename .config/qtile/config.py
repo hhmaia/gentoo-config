@@ -26,7 +26,7 @@
 import os
 import subprocess
 import time
-from libqtile.config import Key, Screen, Group, Drag, Click
+from libqtile.config import Key, Screen, Group, Drag, Click, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook, qtile
 #from powerline.bindings.qtile.widget import PowerlineTextBox
@@ -50,6 +50,18 @@ for g in groups:
         Key([mod, 'shift'], str(g_symbols.index(g.name) + 1),
             lazy.window.togroup(g.name, switch_group=True)),
     ])
+
+groups.append(
+   ScratchPad("scratchpad", [
+        # define a drop down terminal.
+        # it is placed in the upper third of screen by default.
+        DropDown('drop_term', 'alacritty', opacity=0.8),
+    ])
+)
+
+keys.extend([
+    Key([], 'F1', lazy.group['scratchpad'].dropdown_toggle('drop_term'))
+])
 # <<< groups section <<<
 
 # >>> layouts section >>>
@@ -147,7 +159,7 @@ widgets_main = [
                 play_color=colors['highlight'],
             ),
     widget.Sep(**separator_options),
-    widget.Systray(icon_size=12),
+    widget.Systray(icon_size=14),
     widget.Sep(**separator_options),
     widget.TextBox('', fontsize=18),
     widget.Volume(),

@@ -50,6 +50,7 @@ keys = [
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "Return", lazy.spawn(default_term)),
+    Key([mod, 'control'], "Return", lazy.spawn('firefox')),
     Key([mod], 'f', lazy.window.toggle_floating()),
     Key([mod], 'F11', lazy.window.toggle_fullscreen()),
 
