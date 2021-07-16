@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Yachiyo
+Comment=Another Strange Colour Scheme
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+Name=Yachiyo
+GtkTheme=Yachiyo
+IconTheme=Yachiyo
