@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/duo/bk/KT48/Sources/app/commons'
+let g:netrw_dirhist_6='/home/duo/bk/KT48/Sources/app'
+let g:netrw_dirhist_5='/var/lib/portage'
+let g:netrw_dirhist_4='/home/gentoo'
+let g:netrw_dirhist_3='/home/gentoo/henrique'
+let g:netrw_dirhist_2='/home/gentoo/henrique/.conda'
+let g:netrw_dirhist_1='/home/gentoo/henrique/.config/redshift'
+let g:netrw_dirhist_0='/home/shared/.themes/dracula'
+let g:netrw_dirhist_9='/home/duo/repos/sm-embedder'
+let g:netrw_dirhist_8='/home/gentoo/henrique/.conda'

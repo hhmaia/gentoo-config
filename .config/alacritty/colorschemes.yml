@@ -1,0 +1,245 @@
+schemes:
+  drakula: &drakula
+    # Default colors
+    primary:
+      background: '#282a36'
+      foreground: '#f8f8f2'
+
+    # Normal colors
+    normal:
+      black:   '#000000'
+      red:     '#ff5555'
+      green:   '#50fa7b'
+      yellow:  '#f1fa8c'
+      blue:    '#caa9fa'
+      magenta: '#ff79c6'
+      cyan:    '#8be9fd'
+      white:   '#bfbfbf'
+
+    # Bright colors
+    bright:
+      black:   '#575b70'
+      red:     '#ff6e67'
+      green:   '#5af78e'
+      yellow:  '#f4f99d'
+      blue:    '#caa9fa'
+      magenta: '#ff92d0'
+      cyan:    '#9aedfe'
+      white:   '#e6e6e6'
+
+  monokai_pro: &monokai
+    # Default colors
+    primary:
+      background: '#2D2A2E'
+      foreground: '#FCFCFA'
+
+    # Normal colors
+    normal:
+      black:   '#403E41'
+      red:     '#FF6188'
+      green:   '#A9DC76'
+      yellow:  '#FFD866'
+      blue:    '#FC9867'
+      magenta: '#AB9DF2'
+      cyan:    '#78DCE8'
+      white:   '#FCFCFA'
+
+    # Bright colors
+    bright:
+      black:   '#727072'
+      red:     '#FF6188'
+      green:   '#A9DC76'
+      yellow:  '#FFD866'
+      blue:    '#FC9867'
+      magenta: '#AB9DF2'
+      cyan:    '#78DCE8'
+      white:   '#FCFCFA'
+
+
+  garuda: &garuda
+    primary:
+      background: '#191615'
+      foreground: '#EDC29A'
+    cursor:
+      text:       '#0A1124'
+      cursor:     '#EDC29A'
+    normal:
+      black:      '#0A1124'
+      red:        '#63504E'
+      green:      '#A33A4E'
+      yellow:     '#EB3247'
+      blue:       '#F35743'
+      magenta:    '#F6A73B'
+      cyan:       '#FAD42E'
+      white:      '#EDC29A'
+    bright:
+      black:      '#B5977B'
+      red:        '#83706E'
+      green:      '#C35A6E'
+      yellow:     '#FB5267'
+      blue:       '#FF7763'
+      magenta:    '#FFC75B'
+      cyan:       '#FFF44E'
+      white:      '#FDD2BA'
+
+  garuda_alt: &garuda_alt
+    primary:
+#      background: '#171615'
+      background: '#1A1E21'
+      foreground: '#EDC29A'
+    cursor:
+      text:       '#EB3247'
+      cursor:     '#EDC29A'
+    normal:
+      black:      '#0A1124'
+      red:        '#63504E'
+      green:      '#A33A4E'
+      yellow:     '#EB3247'
+      blue:       '#F35743'
+      magenta:    '#F6A73B'
+      cyan:       '#FAD42E'
+      white:      '#EDC29A'
+    bright:
+      black:      '#B5977B'
+      red:        '#83706E'
+      green:      '#C35A6E'
+      yellow:     '#FB5267'
+      blue:       '#FF7763'
+      magenta:    '#FFC75B'
+      cyan:       '#FFF44E'
+      white:      '#FDD2BA'
+
+
+  megaman: &megaman
+    primary:
+      background: '#2A3344'
+      foreground: '#F6D6AD'
+    normal:
+      black:      '#181818'
+      red:        '#E82B2F'
+      green:      '#00D868'
+      yellow:     '#F8E070'
+      blue:       '#0A3BCD'
+      magenta:    '#0080F8'
+      cyan:       '#78D8F0'
+      white:      '#E0E0E0'
+    bright:
+      black:      '#A8A8A8'
+      red:        '#FF3F4B'
+      green:      '#00FF88'
+      yellow:     '#FFED7D'
+      blue:       '#0A6BFD'
+      magenta:    '#0080F8'
+      cyan:       '#88F8FF'
+      white:      '#FFFFFF'
+
+
+  nord: &nord
+    primary:
+      background: '#2e3440'
+      foreground: '#d8dee9'
+      dim_foreground: '#a5abb6'
+    cursor:
+      text: '#2e3440'
+      cursor: '#d8dee9'
+    vi_mode_cursor:
+      text: '#2e3440'
+      cursor: '#d8dee9'
+    selection:
+      text: CellForeground
+      background: '#4c566a'
+    search:
+      matches:
+        foreground: CellBackground
+        background: '#88c0d0'
+      bar:
+        background: '#434c5e'
+        foreground: '#d8dee9'
+    normal:
+      black: '#3b4252'
+      red: '#bf616a'
+      green: '#a3be8c'
+      yellow: '#ebcb8b'
+      blue: '#81a1c1'
+      magenta: '#b48ead'
+      cyan: '#88c0d0'
+      white: '#e5e9f0'
+    bright:
+      black: '#4c566a'
+      red: '#bf616a'
+      green: '#a3be8c'
+      yellow: '#ebcb8b'
+      blue: '#81a1c1'
+      magenta: '#b48ead'
+      cyan: '#8fbcbb'
+      white: '#eceff4'
+    dim:
+      black: '#373e4d'
+      red: '#94545d'
+      green: '#809575'
+      yellow: '#b29e75'
+      blue: '#68809a'
+      magenta: '#8c738c'
+      cyan: '#6d96a5'
+      white: '#aeb3bb'
+
+  # Colors (Monokai Pro)
+  monokai: &monokai
+    # Default colors
+    primary:
+      background: '0x2c2525'
+      foreground: '0xfff1f3'
+
+    # Normal colors
+    normal:
+      black:   '0x2c2525'
+      red:     '0xfd6883'
+      green:   '0xadda78'
+      yellow:  '0xf9cc6c'
+      blue:    '0xf38d70'
+      magenta: '0xa8a9eb'
+      cyan:    '0x85dacc'
+      white:   '0xfff1f3'
+
+    # Bright colors
+    bright:
+      black:   '0x72696a'
+      red:     '0xfd6883'
+      green:   '0xadda78'
+      yellow:  '0xf9cc6c'
+      blue:    '0xf38d70'
+      magenta: '0xa8a9eb'
+      cyan:    '0x85dacc'
+      white:   '0xfff1f3'
+
+
+  # Colors (Dracula)
+  dracula: &dracula
+    # Default colors
+    primary:
+      background: '0x282a36'
+      foreground: '0xf8f8f2'
+   
+    # Normal colors
+    normal:
+      black:   '0x000000'
+      red:     '0xff5555'
+      green:   '0x50fa7b'
+      yellow:  '0xf1fa8c'
+      blue:    '0xbd93f9'
+      magenta: '0xff79c6'
+      cyan:    '0x8be9fd'
+      white:   '0xbbbbbb'
+   
+    # Bright colors
+    bright:
+      black:   '0x555555'
+      red:     '0xff5555'
+      green:   '0x50fa7b'
+      yellow:  '0xf1fa8c'
+      blue:    '0xcaa9fa'
+      magenta: '0xff79c6'
+      cyan:    '0x8be9fd'
+      white:   '0xffffff'
+
+colors: *dracula
