@@ -78,11 +78,11 @@ groups.append(
 )
 
 keys.extend([
-    Key([mod], 'F1', lazy.group['scratchpad'].dropdown_toggle('cmus')),
-    Key([mod], 'F2', lazy.group['scratchpad'].dropdown_toggle('htop')),
-    Key([mod], 'F9', lazy.group['scratchpad'].dropdown_toggle('drop_term')),
-    Key([mod], 'F11', lazy.group['scratchpad'].dropdown_toggle('bluetoothctl')),
-    Key([mod], 'F12', lazy.group['scratchpad'].dropdown_toggle('dmesg')),
+    Key([mod], 'q', lazy.group['scratchpad'].dropdown_toggle('cmus')),
+    Key([mod], 'w', lazy.group['scratchpad'].dropdown_toggle('htop')),
+    Key([mod], 'e', lazy.group['scratchpad'].dropdown_toggle('drop_term')),
+    Key([mod], 'a', lazy.group['scratchpad'].dropdown_toggle('bluetoothctl')),
+    Key([mod], 's', lazy.group['scratchpad'].dropdown_toggle('dmesg')),
 ])
 # <<< groups section <<<
 
@@ -181,13 +181,12 @@ widgets_main = [
                 play_color=colors['highlight'],
             ),
     widget.Sep(**separator_options),
-    widget.Systray(icon_size=14),
-    widget.Sep(**separator_options),
     widget.TextBox('', fontsize=18),
     widget.Volume(),
     widget.Sep(**separator_options),
     widget.Clock(**clock_options),
     widget.Sep(**separator_options),
+    widget.Systray(icon_size=14),
     #widget.BatteryIcon(),
 ]
 
