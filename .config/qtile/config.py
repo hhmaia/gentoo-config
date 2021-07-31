@@ -57,15 +57,15 @@ groups.append(
         # it is placed in the upper third of screen by default.
         DropDown('cmus',
                  'alacritty \
-                 --config-file /home/gentoo/henrique/.config/alacritty/no_opacity.yml \
-                 -e cmus',
+                     --config-file /home/gentoo/henrique/.config/alacritty/no_opacity.yml \
+                     -e cmus',
         ),
         DropDown('htop',
                  'alacritty -e htop', 
         ),
         DropDown('drop_term',
                  'alacritty \
-                 --config-file /home/gentoo/henrique/.config/alacritty/no_opacity.yml',
+                     --config-file /home/gentoo/henrique/.config/alacritty/no_opacity.yml',
         ),
         DropDown('bluetoothctl',
                  'alacritty -e bluetoothctl', 
@@ -73,7 +73,6 @@ groups.append(
         DropDown('dmesg',
                  'alacritty -e dmesg -w', 
         ),
-
    ])
 )
 
@@ -261,7 +260,8 @@ floating_layout = layout.Floating(
         {'wname': 'pinentry'},  # GPG key password entry
         {'wmclass': 'ssh-askpass'},  # ssh-askpass
         {'wmclass': 'xcalendar'}, # xcalendar
-        {'wmclass': 'dayEditor'} # xcalendar day editor
+        {'wmclass': 'dayEditor'}, # xcalendar day editor
+        #{'wmname': 'Steam'}, # steam friends list
     ],
     **layout_params
 )
