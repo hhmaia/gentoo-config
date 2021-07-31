@@ -1,0 +1,2 @@
+changeps1: true 
+env_prompt: \[\e[38;5;15m\] {default_env}\[\e[0m\]

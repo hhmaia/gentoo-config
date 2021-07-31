@@ -184,9 +184,18 @@ widgets_main = [
     widget.TextBox('', fontsize=18),
     widget.Volume(),
     widget.Sep(**separator_options),
+    widget.ThermalSensor(foreground=colors['highlight'],
+                         fmt=' {}'),
+    widget.Sep(**separator_options),
+    widget.Battery(update_interval=3,
+                   hide_threshold=0.5,
+                   low_percentage=0.2,
+                   format='{char} {percent:2.0%} {hour:d}:{min:02d}'),
+    widget.Sep(**separator_options),
     widget.Clock(**clock_options),
     widget.Sep(**separator_options),
     widget.Systray(icon_size=14),
+    #widget.Sep(**separator_options),
     #widget.BatteryIcon(),
 ]
 
@@ -215,7 +224,7 @@ screens = [
            wallpaper='~/wallpapers/planets2.jpg',
            wallpaper_mode='fill',),
     Screen(top=bar_screen2,
-           wallpaper='~/.wallpapers/planets2.jpg',
+           wallpaper='~/wallpapers/planets2.jpg',
            wallpaper_mode='fill',),
 ]
 
