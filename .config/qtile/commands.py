@@ -12,7 +12,7 @@ ss_doc_mod = "sh -c 'import " + ss_doc_dir + ss_pattern
 rofi = "rofi -show drun \
                 -width 20 \
                 -show-icons \
-                -theme ~/.config/rofi/themes/dracula.rasi \
+                -theme ~/.config/rofi/themes/gruvbox-dark.rasi \
                 -terminal alacritty"
 
 

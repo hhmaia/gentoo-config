@@ -37,9 +37,9 @@ nord_colors = {
 }
 
 gruvbox_colors = {
-    #'highlight':        'D65D0E',
+    'highlight':        'D65D0E',
+    #'highlight':        'B8BB26',
     #'highlight':        '98971A',
-    'highlight':        'B8BB26',
     #'highlight':        '8EC07C',
     #'highlight':        'FE8019',
     #'highlight':        'FB4934',
@@ -52,6 +52,7 @@ gruvbox_colors = {
     'separator':        '665C54',
     #'group_inactive':   'A89984',
     'group_inactive':   '665C54',
-    'group_active':     'D65D0E', 
+    'group_active':     'D79921', 
+    #'group_active':     'D65D0E', 
     #'group_active':     '458588', 
 }
