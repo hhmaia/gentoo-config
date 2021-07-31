@@ -34,7 +34,7 @@ from libqtile import layout, bar, widget, hook, qtile
 from typing import List  # noqa: F401
 import commands
 from keybindings import mod, keys, default_term
-from colorschemes import dracula_colors as colors
+from colorschemes import gruvbox_colors as colors
 
 
 # >>> groups section >>>
@@ -103,10 +103,11 @@ layouts = [
 # <<< layouts section <<<
 
 widget_defaults = dict(
-    #font='SauceCodePro Nerd Font',
-    font='Source Code Pro Bold',
-    fontsize=9,
-    padding=2,
+    font='SauceCodePro Nerd Font Bold',
+    #font='Source Code Pro',
+    #font='Hack',
+    fontsize=10,
+    padding=1,
     foreground=colors['highlight'],
     background=colors['background'],
     border_color=colors['border'],
@@ -130,14 +131,14 @@ graph_monitor_options = dict(
 separator_options = dict(
     foreground=colors['separator'],
     linewidth=1,
-    size_percent=50,
+    size_percent=70,
     padding=4,
 )
 
 groupbox_options = dict(
     active=colors['highlight'],
     font='Symbola',
-    fontsize=10,
+    fontsize=11,
     block_highlight_text_color=colors['group_active'],
     this_current_screen_border=colors['group_active'],
     inactive=colors['group_inactive'],
@@ -154,15 +155,15 @@ clock_options = dict(
 )
 
 widgets_main = [
-    widget.Sep(**separator_options),
-    widget.TextBox(
-                 '',
-                 fontsize=18,
-                 foreground=colors['highlight'],
-                 mouse_callbacks={
-                    'Button1': lambda qtile: qtile.cmd_spawn(commands.rofi)
-                 }
-    ),
+#    widget.Sep(**separator_options),
+#    widget.TextBox(
+#                 '',
+#                 fontsize=18,
+#                 foreground=colors['highlight'],
+#                 mouse_callbacks={
+#                    'Button1': lambda qtile: qtile.cmd_spawn(commands.rofi)
+#                 }
+#    ),
     widget.Sep(**separator_options),
     widget.CurrentLayout(foreground=colors['highlight'],),
     widget.GroupBox(**groupbox_options),
@@ -180,11 +181,10 @@ widgets_main = [
                 play_color=colors['highlight'],
             ),
     widget.Sep(**separator_options),
-    widget.TextBox('', fontsize=18),
-    widget.Volume(),
+    widget.Volume(fmt=' {}',),
     widget.Sep(**separator_options),
     widget.ThermalSensor(foreground=colors['highlight'],
-                         fmt=' {}'),
+                         fmt=' {}',),
     widget.Sep(**separator_options),
     widget.Battery(update_interval=3,
                    hide_threshold=0.5,
@@ -208,7 +208,7 @@ widgets_bar2 = [
     widget.Sep(**separator_options),
 ]
 
-bar_defaults = dict(size=24,
+bar_defaults = dict(size=22,
                     opacity=1,
                     margin=[0, 0, 0, 0],
                     background=colors['background'])
@@ -220,10 +220,10 @@ bar_screen2 = bar.Bar(widgets=widgets_bar2,
 
 screens = [
     Screen(top=bar_screen1,
-           wallpaper='~/wallpapers/planets2.jpg',
+           wallpaper='~/wallpapers/planets.jpg',
            wallpaper_mode='fill',),
     Screen(top=bar_screen2,
-           wallpaper='~/wallpapers/planets2.jpg',
+           wallpaper='~/wallpapers/planets.jpg',
            wallpaper_mode='fill',),
 ]
 

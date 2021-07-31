@@ -54,7 +54,8 @@ execute pathogen#infect()
 
 let g:airline_powerline_fonts = 1
 " let g:airline_theme = 'raven'
-let g:airline_theme = 'dracula'
+" let g:airline_theme = 'dracula'
+let g:airline_theme = 'gruvbox'
 
 set number
 set nolist
@@ -81,11 +82,14 @@ syntax on
 " colorscheme delek
 " colorscheme nord
 " colorscheme monokai
-colorscheme dracula
+" colorscheme dracula
+colorscheme elflord
+colorscheme gruvbox 
 if $COLORTERM != ""
     hi Normal guibg=NONE ctermbg=NONE
     set termguicolors
 endif
+
 
 set colorcolumn=80
 set cursorline
