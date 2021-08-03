@@ -34,6 +34,24 @@ fi
 
 . /usr/share/git/git-prompt.sh
 
+# >>> timer (for prompt) >>>
+function timer_start {
+  timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+  timer_show=$(($SECONDS - $timer))
+  printf -v seconds_show "%02d" $((${timer_show}%60))
+  printf -v minutes_show "%02d" $((${timer_show}/60))
+  unset timer
+}
+
+trap 'timer_start' DEBUG
+PROMPT_COMMAND=timer_stop
+
+#PS1='${timer_show}'
+# <<< timer (for prompt) <<<
+
 ## >>> prompt >>>
 if [ ! -z ${COLORTERM} ]; then
     # 濾
@@ -42,12 +60,13 @@ if [ ! -z ${COLORTERM} ]; then
     if [ -v SSH_CONNECTION ]; then
         PS1+="\[\e[38;5;4m\] \h\[\e[0m\]"
     fi
+    PS1+="\[\e[38;5;14m\]\${minutes_show}:\${seconds_show}\[\e[0m\]"
     PS1+="\[\e[38;5;1;1m\]\w\[\e[0m\]"
     PS1+='`if [ -n "$(jobs -p)" ]; then echo "\[\e[38;5;2;1m\]\j\[\e[0m\]"; fi`'
-    PS1+="\[\e[38;5;3m\] ☉ \[\e[0m\]"
+    PS1+="\[\e[38;5;11m\] ☉ \[\e[0m\]"
 
     PS2="\[\e[38;5;11;1m\]濾\[\e[0m\]"
 fi
 # <<< prompt <<<
 export PATH=~/.local/bin:"$PATH"
-
+export GPG_TTY=$(tty)
