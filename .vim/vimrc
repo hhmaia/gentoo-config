@@ -84,7 +84,7 @@ syntax on
 " colorscheme monokai
 " colorscheme dracula
 colorscheme elflord
-colorscheme gruvbox 
+colorscheme gruvbox
 if $COLORTERM != ""
     hi Normal guibg=NONE ctermbg=NONE
     set termguicolors
@@ -100,6 +100,6 @@ autocmd ColorScheme *
      \ highlight colorcolumn ctermbg=238
 
 " removes trailing whitespaces
-" autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\s\+$//e
 
 source ~/.vim/vimrc_coc

@@ -57,21 +57,19 @@ groups.append(
         # it is placed in the upper third of screen by default.
         DropDown('cmus',
                  'alacritty \
-                     --config-file /home/gentoo/henrique/.config/alacritty/no_opacity.yml \
                      -e cmus',
         ),
         DropDown('htop',
-                 'alacritty -e htop', 
+                 'alacritty -e htop',
         ),
         DropDown('drop_term',
-                 'alacritty \
-                     --config-file /home/gentoo/henrique/.config/alacritty/no_opacity.yml',
+                 'alacritty',
         ),
         DropDown('bluetoothctl',
-                 'alacritty -e bluetoothctl', 
+                 'alacritty -e bluetoothctl',
         ),
         DropDown('dmesg',
-                 'alacritty -e dmesg -w', 
+                 'alacritty -e dmesg -w',
         ),
    ])
 )
@@ -103,7 +101,7 @@ layouts = [
 # <<< layouts section <<<
 
 widget_defaults = dict(
-    font='SauceCodePro Nerd Font Bold',
+    font='SauceCodePro Nerd Font',
     #font='Source Code Pro',
     #font='Hack',
     fontsize=10,
