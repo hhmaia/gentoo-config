@@ -1,6 +1,11 @@
 #!/bin/sh
-#nm-applet &
-#blueman-applet &
+
 setxkbmap -option caps:swapescape &
 xset r rate 300 90 &
-~/.local/bin/picom -b
+#systemctl try-restart --user redshift &
+redshift -x && redshift -o
+
+while killall -s SIGKILL picom; do
+  sleep 0.2
+done
+picom -b &

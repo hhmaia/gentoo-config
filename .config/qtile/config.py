@@ -56,11 +56,11 @@ groups.append(
         # define a drop down terminal.
         # it is placed in the upper third of screen by default.
         DropDown('cmus',
-                 'alacritty \
-                     -e cmus',
+                 'alacritty -e cmus',
         ),
         DropDown('htop',
-                 'alacritty -e htop',
+                 'alacritty',
+                 height=0.5
         ),
         DropDown('drop_term',
                  'alacritty',
@@ -96,15 +96,17 @@ layouts = [
                grow_amount=5,
                fair=False,),
     layout.Max(),
-    layout.MonadTall(**layout_params),
+#    layout.MonadTall(**layout_params),
 ]
 # <<< layouts section <<<
 
 widget_defaults = dict(
-    font='SauceCodePro Nerd Font',
+    #font='SauceCodePro Nerd Font',
+    #font='Tamzen',
     #font='Source Code Pro',
     #font='Hack',
-    fontsize=10,
+    font='TamzenForPowerline',
+    fontsize=20,
     padding=1,
     foreground=colors['highlight'],
     background=colors['background'],
@@ -115,28 +117,28 @@ extension_defaults = widget_defaults.copy()
 
 graph_monitor_options = dict(
     graph_color=colors['highlight'],
+    fill_color=colors['highlight'],
+    samples=200,
     line_width=1,
-    #start_pos='top',
-    frequency=0.3,
-    samples=100,
-    margin_x=1,
+    frequency=0.2,
+    margin_x=-149,
     margin_y=4,
     border_width=0,
-    type='line',
-    mouse_callbacks={ 'Button1': lambda qtile: qtile.cmd_spawn('alacritty -e htop') },
+    width=50,
+    type='linefill'
 )
 
 separator_options = dict(
     foreground=colors['separator'],
     linewidth=1,
     size_percent=70,
-    padding=4,
+    padding=6,
 )
 
 groupbox_options = dict(
     active=colors['highlight'],
     font='Symbola',
-    fontsize=11,
+    fontsize=12,
     block_highlight_text_color=colors['group_active'],
     this_current_screen_border=colors['group_active'],
     inactive=colors['group_inactive'],
@@ -145,55 +147,51 @@ groupbox_options = dict(
 )
 
 clock_options = dict(
-    format='%a %d of %b %H:%M:%S',
+    format='%a %d %b %H:%M:%S',
     mouse_callbacks={
-        'Button1': lambda qtile: qtile.cmd_spawn('xcalendar'),
-        'Button3': lambda qtile: qtile.cmd_spawn('killall xcalendar')
+        'Button1': lambda : qtile.cmd_spawn('xcalendar'),
+        'Button3': lambda : qtile.cmd_spawn('killall xcalendar')
     }
 )
 
 widgets_main = [
 #    widget.Sep(**separator_options),
-#    widget.TextBox(
-#                 '',
-#                 fontsize=18,
-#                 foreground=colors['highlight'],
-#                 mouse_callbacks={
-#                    'Button1': lambda qtile: qtile.cmd_spawn(commands.rofi)
-#                 }
-#    ),
-    widget.Sep(**separator_options),
-    widget.CurrentLayout(foreground=colors['highlight'],),
+#    widget.CurrentLayout(foreground=colors['highlight'],),
     widget.GroupBox(**groupbox_options),
     widget.Sep(**separator_options),
-    widget.Prompt(prompt='☉ ',),
+    widget.Prompt(prompt='☉ ', fontsize=12),
     widget.Sep(**separator_options),
-    widget.WindowName(foreground=colors['highlight']),
+    widget.WindowName(foreground=colors['highlight'], fontsize=12),
+    widget.Spacer(length=3),
     widget.CPUGraph(**graph_monitor_options),
+    widget.Spacer(length=3),
     widget.MemoryGraph(**graph_monitor_options),
+    widget.Spacer(length=3),
     widget.NetGraph( **graph_monitor_options),
+    widget.Spacer(length=3),
     widget.HDDBusyGraph(device='sdb', **graph_monitor_options),
+    widget.Spacer(length=3),
     widget.HDDBusyGraph(device='sda', **graph_monitor_options),
     widget.Spacer(bar.STRETCH),
     widget.Cmus(foreground=colors['text_normal'],
                 play_color=colors['highlight'],
-            ),
+                noplay_color=colors['separator'],
+                fontsize=12,),
     widget.Sep(**separator_options),
-    widget.Volume(fmt=' {}',),
+    widget.TextBox(text='',),
+    widget.Volume(fmt='{}',),
     widget.Sep(**separator_options),
+    widget.TextBox(text="", fontsize=16),
     widget.ThermalSensor(foreground=colors['highlight'],
-                         fmt=' {}',),
+                         fmt='{}',),
+    #widget.Sep(**separator_options),
+    widget.Sep(**separator_options),
+    widget.Clock(**clock_options),
     widget.Sep(**separator_options),
     widget.Battery(update_interval=3,
                    hide_threshold=0.5,
                    low_percentage=0.2,
                    format='{char} {percent:2.0%} {hour:d}:{min:02d}'),
-    widget.Sep(**separator_options),
-    widget.Clock(**clock_options),
-    widget.Sep(**separator_options),
-    widget.Systray(icon_size=14),
-    #widget.Sep(**separator_options),
-    #widget.BatteryIcon(),
 ]
 
 widgets_bar2 = [
