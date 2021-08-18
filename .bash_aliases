@@ -34,3 +34,5 @@ alias find_modules='find /lib/modules/$(uname -r)/ -type f -name "*.ko*"'
 
 alias nfetch='neofetch --disable WM --disable GPU --disable host --disable shell --disable CPU --disable uptime --disable icons --ascii_distro gentoo_small --ascii_bold on --cpu_brand off --distro_shorthand tiny --bold on --disable memory'
 
+alias eip4="curl -s http://whatismyip.akamai.com/"
+alias eip6="curl -s ident.me"
