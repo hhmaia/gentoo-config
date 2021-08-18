@@ -56,11 +56,14 @@ PROMPT_COMMAND=timer_stop
 if [ ! -z ${COLORTERM} ]; then
     # 濾
     PS1=''
+    if ! cmp -s "/proc/1/mountinfo" "/proc/$$/mountinfo"; then
+       PS1+="\[\e[38;5;1m\]\[\e[0m\]"
+    fi
     PS1+="\[\e[38;5;7m\]\$(__git_ps1 '%s')\[\e[0m\]"
     if [ -v SSH_CONNECTION ]; then
-        PS1+="\[\e[38;5;4m\] \h\[\e[0m\]"
+        PS1+="\[\e[38;5;6m\] \h\[\e[0m\]"
     fi
-    PS1+="\[\e[38;5;14m\]\${minutes_show}:\${seconds_show}\[\e[0m\]"
+    PS1+="\[\e[38;5;4m\]\${minutes_show}:\${seconds_show}\[\e[0m\]"
     PS1+="\[\e[38;5;1;1m\]\w\[\e[0m\]"
     PS1+='`if [ -n "$(jobs -p)" ]; then echo "\[\e[38;5;2;1m\]\j\[\e[0m\]"; fi`'
     PS1+="\[\e[38;5;11m\] ☉ \[\e[0m\]"
