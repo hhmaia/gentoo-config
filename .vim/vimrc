@@ -102,4 +102,9 @@ autocmd ColorScheme *
 " removes trailing whitespaces
 autocmd BufWritePre * %s/\s\+$//e
 
+set backupdir=~/tmp/vim/
+set directory=~/tmp/vim/
+set undodir=~/tmp/vim
+
 source ~/.vim/vimrc_coc
+
